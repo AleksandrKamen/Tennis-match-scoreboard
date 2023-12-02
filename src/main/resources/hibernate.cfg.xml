@@ -9,8 +9,9 @@
     <property name="hibernate.dialect">org.hibernate.dialect.H2Dialect</property>
     <property name="show_sql">true</property>
     <property name="format_sql">true</property>
-
-
     <property name="hibernate.hbm2ddl.auto">create</property>
+
+    <mapping class="entity.PlayersEntity"/>
+    <mapping class="entity.MatchesEntity"/>
   </session-factory>
 </hibernate-configuration>

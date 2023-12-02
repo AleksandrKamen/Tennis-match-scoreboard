@@ -12,12 +12,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "players")
-public class PlayersEntity {
+public class PlayersEntity  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(unique = true, nullable = false)
     private String name;
-
-
 }
