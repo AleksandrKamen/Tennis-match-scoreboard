@@ -1,14 +1,15 @@
 package repository;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
-public interface Repository<K,E>{
+public interface Repository<K extends Serializable,E>{
 
    E save(E entity);
    Optional<E> find(K id);
    List<E> findAll();
    E update(E entity);
-   boolean delete(K id);
+   void delete(K id);
 
 }

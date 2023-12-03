@@ -1,7 +1,8 @@
 package repository;
 
+import jakarta.persistence.EntityManager;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.SessionFactory;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,39 +11,34 @@ import java.util.Optional;
 public class BaseRepository<K extends Serializable,E > implements Repository<K,E>{
 
     private final Class<E> clazz;
-    private final SessionFactory sessionFactory;
+    @Getter
+    private final EntityManager entityManager;
     @Override
     public E save(E entity) {
-        var session = sessionFactory.openSession();
-        session.persist(entity);
+        entityManager.persist(entity);
         return entity;
     }
 
     @Override
     public Optional<E> find(K id) {
-        var session = sessionFactory.openSession();
-        return Optional.ofNullable(session.find(clazz, id));
+        return Optional.ofNullable(entityManager.find(clazz, id));
     }
 
     @Override
     public List<E> findAll() {
-        var session = sessionFactory.openSession();
-        var criteriaQuery = session.getCriteriaBuilder().createQuery(clazz);
+        var criteriaQuery = entityManager.getCriteriaBuilder().createQuery(clazz);
         criteriaQuery.from(clazz);
-        return session.createQuery(criteriaQuery).getResultList();
+        return entityManager.createQuery(criteriaQuery).getResultList();
     }
 
     @Override
     public E update(E entity) {
-        var session = sessionFactory.openSession();
-        session.merge(entity);
+        entityManager.merge(entity);
         return entity;
     }
     @Override
-    public boolean delete(K id) {
-        var session = sessionFactory.openSession();
-        session.remove(id);
-        session.flush();
-        return false;
+    public void delete(K id) {
+        entityManager.remove(id);
+        entityManager.flush();
     }
 }
