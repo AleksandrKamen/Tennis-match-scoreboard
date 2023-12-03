@@ -18,6 +18,7 @@ public class BaseRepository<K extends Serializable,E > implements Repository<K,E
         entityManager.persist(entity);
         return entity;
     }
+
     @Override
     public Optional<E> find(K id) {
         return Optional.ofNullable(entityManager.find(clazz, id));
