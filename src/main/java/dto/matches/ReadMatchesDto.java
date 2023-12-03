@@ -1,4 +1,4 @@
-package dto;
+package dto.matches;
 
 import lombok.Builder;
 import lombok.Value;
