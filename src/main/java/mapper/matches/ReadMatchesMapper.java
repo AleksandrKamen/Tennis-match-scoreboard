@@ -1,16 +1,12 @@
-package mapper;
+package mapper.matches;
 
 import dto.matches.ReadMatchesDto;
 import entity.MatchesEntity;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import mapper.Mapper;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 public class ReadMatchesMapper implements Mapper<MatchesEntity, ReadMatchesDto> {
-    private static final ReadMatchesMapper INSTANCE = new ReadMatchesMapper();
-    public ReadMatchesMapper getInstance(){return INSTANCE;}
-
-
     @Override
     public ReadMatchesDto mapFrom(MatchesEntity object) {
         return ReadMatchesDto.builder()
