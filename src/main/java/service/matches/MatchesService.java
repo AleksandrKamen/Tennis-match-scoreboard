@@ -32,6 +32,17 @@ public class MatchesService {
       var matchesEntity = createMathesMapper.mapFrom(createMathesDto);
       mathesRepository.save(matchesEntity);
       return createMathesDto;
+  }  public void createMatches(List<String> playersNames){
+        for (int i = 0; i < playersNames.size()-1; i+=2) {
+            boolean rnd = Math.random() > 0.5;
+            var createMathesDto = CreateMathesDto.builder()
+                    .player1(playersNames.get(i))
+                    .player2(playersNames.get(i + 1))
+                    .winner(rnd ? playersNames.get(i) : playersNames.get(i + 1))
+                    .build();
+            var matchesEntity = createMathesMapper.mapFrom(createMathesDto);
+            mathesRepository.save(matchesEntity);
+        }
   }
 
  public List<ReadMatchesDto> findAllMatches(){

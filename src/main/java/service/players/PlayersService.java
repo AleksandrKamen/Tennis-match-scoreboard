@@ -2,15 +2,14 @@ package service.players;
 
 import dto.players.CreatePlayersDto;
 import dto.players.ReadPlayersDto;
-import entity.players.PlayersEntity;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import mapper.players.CreatePlayersMapper;
 import mapper.players.ReadPlayersMapper;
 import repository.players.PlayersRepository;
 
+import java.util.List;
 import java.util.Optional;
-
 @RequiredArgsConstructor
 public class PlayersService {
    private final PlayersRepository playersRepository;
@@ -29,6 +28,16 @@ public static PlayersService openService(EntityManager entityManager){
      var readPlayersDto = readPlayersMapper.mapFrom(save);
      return readPlayersDto;
  }
+
+    public void createPlayers(List<String> playersNames){
+        for (String playersName : playersNames) {
+            var playersEntity = createPlayersMapper.mapFrom(
+                    CreatePlayersDto.builder()
+                            .name(playersName)
+                            .build());
+            playersRepository.save(playersEntity);
+        }
+    }
 
 public Optional<ReadPlayersDto> findPlayerByName(String name){
     return playersRepository.findByName(name)

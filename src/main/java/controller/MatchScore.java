@@ -1,16 +1,10 @@
-package entity.matches;
+package controller;
 
 import entity.players.PlayersEntity;
-import jakarta.persistence.Embeddable;
-import lombok.*;
+import lombok.Getter;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Embeddable
-@Setter @Getter
+@Getter
 public class MatchScore { // Класс описывающий счет матча
-
 
   private int [] points = new int[]{0,0};
   private int [] games = new int[]{0,0};

@@ -1,7 +1,8 @@
 package repository.players;
 
+
 import entity.players.PlayersEntity;
-import entity.PlayersEntity_;
+import entity.players.PlayersEntity_;
 import jakarta.persistence.EntityManager;
 import repository.BaseRepository;
 

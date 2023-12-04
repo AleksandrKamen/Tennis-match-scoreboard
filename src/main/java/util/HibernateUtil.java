@@ -6,15 +6,26 @@ import org.hibernate.cfg.Configuration;
 
 @UtilityClass
 public class HibernateUtil {
+    private SessionFactory sessionFactory;
 
+static {
+    DataImporterUtil.importData();
+}
+public SessionFactory getSessionFactory(){
+       if (sessionFactory == null){
+           createSessionFactory();
+       }
+       return sessionFactory;
+}
 
- public static SessionFactory createSessionFactory(){
+ public SessionFactory createSessionFactory(){
      Configuration configuration = buildConfiguration();
      configuration.configure();
-     return configuration.buildSessionFactory();
+     sessionFactory = configuration.buildSessionFactory();
+     return sessionFactory;
  }
 
-  public static Configuration buildConfiguration(){
+  public Configuration buildConfiguration(){
       Configuration configuration = new Configuration();
       return configuration;
   }
