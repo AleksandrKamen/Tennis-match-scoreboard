@@ -1,11 +1,13 @@
-package repository;
+package repository.players;
 
-import entity.PlayersEntity;
+import entity.players.PlayersEntity;
 import entity.PlayersEntity_;
 import jakarta.persistence.EntityManager;
+import repository.BaseRepository;
+
 import java.util.Optional;
 
-public class PlayersRepository extends BaseRepository<Integer, PlayersEntity>{
+public class PlayersRepository extends BaseRepository<Integer, PlayersEntity> {
 
     public PlayersRepository(EntityManager entityManager){
         super(PlayersEntity.class, entityManager);

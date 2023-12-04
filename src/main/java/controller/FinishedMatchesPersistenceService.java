@@ -1,13 +1,12 @@
-package service;
+package controller;
 
 import dto.matches.CreateMathesDto;
 import dto.matches.ReadMatchesDto;
 import lombok.RequiredArgsConstructor;
 import mapper.matches.CreateMathesMapper;
 import mapper.matches.ReadMatchesMapper;
-import repository.MathesRepository;
-import repository.PlayersRepository;
-import validator.ValidationResult;
+import repository.matches.MathesRepository;
+import repository.players.PlayersRepository;
 
 import java.util.List;
 @RequiredArgsConstructor

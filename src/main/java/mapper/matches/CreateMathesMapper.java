@@ -1,10 +1,10 @@
 package mapper.matches;
 
 import dto.matches.CreateMathesDto;
-import entity.MatchesEntity;
+import entity.matches.MatchesEntity;
 import lombok.RequiredArgsConstructor;
 import mapper.Mapper;
-import repository.PlayersRepository;
+import repository.players.PlayersRepository;
 
 @RequiredArgsConstructor
 public class CreateMathesMapper implements Mapper<CreateMathesDto, MatchesEntity> {

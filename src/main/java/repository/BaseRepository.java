@@ -33,8 +33,7 @@ public class BaseRepository<K extends Serializable,E > implements Repository<K,E
 
     @Override
     public E update(E entity) {
-        entityManager.merge(entity);
-        return entity;
+       return entityManager.merge(entity);
     }
     @Override
     public void delete(K id) {

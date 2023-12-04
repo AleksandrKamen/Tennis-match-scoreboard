@@ -1,9 +1,7 @@
 package mapper.players;
 
 import dto.players.ReadPlayersDto;
-import entity.PlayersEntity;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import entity.players.PlayersEntity;
 import lombok.RequiredArgsConstructor;
 import mapper.Mapper;
 

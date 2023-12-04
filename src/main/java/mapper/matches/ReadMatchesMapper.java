@@ -1,7 +1,7 @@
 package mapper.matches;
 
 import dto.matches.ReadMatchesDto;
-import entity.MatchesEntity;
+import entity.matches.MatchesEntity;
 import lombok.RequiredArgsConstructor;
 import mapper.Mapper;
 

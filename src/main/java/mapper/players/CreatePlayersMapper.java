@@ -1,7 +1,7 @@
 package mapper.players;
 
 import dto.players.CreatePlayersDto;
-import entity.PlayersEntity;
+import entity.players.PlayersEntity;
 import lombok.RequiredArgsConstructor;
 import mapper.Mapper;
 @RequiredArgsConstructor

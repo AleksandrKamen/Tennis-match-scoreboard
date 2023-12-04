@@ -1,5 +1,6 @@
-package entity;
+package entity.matches;
 
+import entity.players.PlayersEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

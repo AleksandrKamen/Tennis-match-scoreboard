@@ -1,5 +1,7 @@
-package entity;
+package controller;
 
+import entity.matches.MatchScore;
+import entity.players.PlayersEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

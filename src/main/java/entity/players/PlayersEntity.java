@@ -1,4 +1,4 @@
-package entity;
+package entity.players;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
