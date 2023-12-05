@@ -52,6 +52,14 @@ public class MatchesService {
              .toList();
  }
 
+ public List<ReadMatchesDto> findMatchesWithPagination(int page){
+         int offset = page * 7 - 7;
+         int limit =  7;
+         return mathesRepository.findMatchesWithPagination(offset,limit).stream()
+                 .map(readMatchesMapper::mapFrom)
+                 .toList();
+ }
+
  public List<ReadMatchesDto> findMatchesByPlayerName(String playerName){
     var mabyPlayer = playersRepository.findByName(playerName);
     if (mabyPlayer.isPresent()){
