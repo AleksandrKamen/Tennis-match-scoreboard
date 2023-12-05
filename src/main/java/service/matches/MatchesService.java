@@ -12,7 +12,6 @@ import repository.players.PlayersRepository;
 import java.util.Collections;
 import java.util.List;
 
-
 @RequiredArgsConstructor
 public class MatchesService {
     private final MathesRepository mathesRepository;
@@ -63,7 +62,20 @@ public class MatchesService {
  public List<ReadMatchesDto> findMatchesByPlayerName(String playerName){
     var mabyPlayer = playersRepository.findByName(playerName);
     if (mabyPlayer.isPresent()){
-       return mathesRepository.findByPlayerId(mabyPlayer.get().getId()).stream().map(readMatchesMapper::mapFrom).toList();
+       return mathesRepository.findByPlayerId(mabyPlayer.get().getId()).stream()
+               .map(readMatchesMapper::mapFrom)
+               .toList();
+    }
+    return Collections.emptyList();
+ }
+ public List<ReadMatchesDto> findMatchesByPlayerName(String playerName, int page){
+     int offset = page * 7 - 7;
+     int limit =  7;
+    var mabyPlayer = playersRepository.findByName(playerName);
+    if (mabyPlayer.isPresent()){
+       return mathesRepository.findByPlayerId(mabyPlayer.get().getId(), offset,limit).stream()
+               .map(readMatchesMapper::mapFrom)
+               .toList();
     }
     return Collections.emptyList();
  }

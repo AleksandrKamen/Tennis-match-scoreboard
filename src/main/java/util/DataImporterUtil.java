@@ -31,6 +31,5 @@ public class DataImporterUtil {
 
             entityManager.getTransaction().commit();
 
-
     }
 }
