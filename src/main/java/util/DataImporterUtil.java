@@ -25,13 +25,11 @@ public class DataImporterUtil {
              "Christian Garin","Bernabe Zapata Miralles","Dominik Koepfer","Constant Lestienne","Taro Daniel",
              "Benjamin Bonzi","Tomas Machac","Gasquet Richard","Luca Van Assche","Wawrinka Stanislas","Daniel Altmaier",
              "Marton Fucsovics","Yoshihito Nishioka","Zhizhen Zhang","Roman Safiullin","Christopher Eubanks");
-     playersService.createPlayers(names);
-     matchesService.createMatches(names);
+
+            playersService.createPlayers(names);
+            matchesService.createMatches(names);
 
             entityManager.getTransaction().commit();
-
-
-
 
 
     }

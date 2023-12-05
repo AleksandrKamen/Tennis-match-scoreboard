@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @Entity
-@Table(name = "players")
+@Table(name = "players", indexes = {@Index(name = "name_idx", columnList = "name")})
 public class PlayersEntity  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
