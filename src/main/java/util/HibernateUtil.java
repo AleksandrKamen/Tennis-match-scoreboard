@@ -18,17 +18,15 @@ public SessionFactory getSessionFactory(){
        return sessionFactory;
 }
 
- public SessionFactory createSessionFactory(){
+ private SessionFactory createSessionFactory(){
      Configuration configuration = buildConfiguration();
      configuration.configure();
      sessionFactory = configuration.buildSessionFactory();
      return sessionFactory;
  }
 
-  public Configuration buildConfiguration(){
+  private Configuration buildConfiguration(){
       Configuration configuration = new Configuration();
       return configuration;
   }
-
-
 }
