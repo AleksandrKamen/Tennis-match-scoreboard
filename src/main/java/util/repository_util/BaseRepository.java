@@ -1,4 +1,4 @@
-package util.repository;
+package util.repository_util;
 
 import jakarta.persistence.EntityManager;
 import lombok.Getter;

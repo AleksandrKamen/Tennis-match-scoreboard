@@ -2,9 +2,9 @@ package players.repository;
 
 
 import players.entity.PlayersEntity;
-import entity.players.PlayersEntity_;
 import jakarta.persistence.EntityManager;
-import util.repository.BaseRepository;
+import players.entity.PlayersEntity_;
+import util.repository_util.BaseRepository;
 
 import java.util.Optional;
 

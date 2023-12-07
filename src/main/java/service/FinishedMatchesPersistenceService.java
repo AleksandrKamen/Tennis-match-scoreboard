@@ -41,15 +41,12 @@ public class FinishedMatchesPersistenceService { // инкапсулирует �
                 ((proxy, method, args) -> method.invoke(sessionFactory.getCurrentSession(),args)));
         var playersService = PlayersService.openService(entityManager);
         entityManager.getTransaction().begin();
-
-        var mabyPlayer1 = playersService.findPlayerByName(createMathesDto.getPlayer1());
-        var mabyPlayer2 = playersService.findPlayerByName(createMathesDto.getPlayer2());
-        if (!mabyPlayer1.isPresent()){
+        try {
             playersService.createPlayer(CreatePlayersDto.builder().name(createMathesDto.getPlayer1()).build());
-        }
-        if (!mabyPlayer2.isPresent()){
+        } catch (Exception e){}
+        try {
             playersService.createPlayer(CreatePlayersDto.builder().name(createMathesDto.getPlayer2()).build());
-        }
+        } catch (Exception e){}
         entityManager.getTransaction().commit();
     }
     private void saveMatch(CreateMathesDto createMathesDto){

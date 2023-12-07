@@ -1,4 +1,4 @@
-package util.repository;
+package util.repository_util;
 
 import java.io.Serializable;
 import java.util.List;

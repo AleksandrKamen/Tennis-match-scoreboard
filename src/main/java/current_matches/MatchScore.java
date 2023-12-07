@@ -11,7 +11,7 @@ public class MatchScore { // Класс описывающий счет матч
   private int [] sets = new int[]{0,0};
   private int [] tieBreak = new int[]{0,0};
 
-  private GameState gameState = GameState.GAME_IS_NOT_OVER;
+  private State gameState = State.NOT_OVER;
   private boolean isTieBreak = false;
   private boolean matchIsOver = false;
   private CreatePlayersDto winner = null;

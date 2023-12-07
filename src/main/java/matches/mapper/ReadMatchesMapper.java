@@ -3,7 +3,7 @@ package matches.mapper;
 import matches.dto.ReadMatchesDto;
 import matches.entity.MatchesEntity;
 import lombok.RequiredArgsConstructor;
-import util.mapper.Mapper;
+import util.mapper_util.Mapper;
 
 @RequiredArgsConstructor
 public class ReadMatchesMapper implements Mapper<MatchesEntity, ReadMatchesDto> {

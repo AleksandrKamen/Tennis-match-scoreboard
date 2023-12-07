@@ -3,7 +3,7 @@ package players.mapper;
 import players.dto.ReadPlayersDto;
 import players.entity.PlayersEntity;
 import lombok.RequiredArgsConstructor;
-import util.mapper.Mapper;
+import util.mapper_util.Mapper;
 
 @RequiredArgsConstructor
 public class ReadPlayersMapper implements Mapper<PlayersEntity, ReadPlayersDto> {

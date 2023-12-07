@@ -1,10 +1,10 @@
 package matches.repository;
 
 import matches.entity.MatchesEntity;
-import entity.matches.MatchesEntity_;
+import matches.entity.MatchesEntity_;
 import players.entity.PlayersEntity;
 import jakarta.persistence.EntityManager;
-import util.repository.BaseRepository;
+import util.repository_util.BaseRepository;
 
 import java.util.List;
 
