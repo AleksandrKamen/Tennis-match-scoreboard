@@ -1,15 +1,10 @@
 package current_matches;
 
-import players.dto.CreatePlayersDto;
 import lombok.Getter;
+import players.dto.CreatePlayersDto;
 
 @Getter
 public class MatchScore { // Класс описывающий счет матча
-
-  private int [] points = new int[]{0,0};
-  private int [] games = new int[]{0,0};
-  private int [] sets = new int[]{0,0};
-  private int [] tieBreak = new int[]{0,0};
 
   private State gameState = State.NOT_OVER;
   private boolean isTieBreak = false;
