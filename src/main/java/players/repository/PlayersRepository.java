@@ -1,11 +1,9 @@
 package players.repository;
 
-
 import players.entity.PlayersEntity;
 import jakarta.persistence.EntityManager;
 import players.entity.PlayersEntity_;
 import util.repository_util.BaseRepository;
-
 import java.util.Optional;
 
 public class PlayersRepository extends BaseRepository<Integer, PlayersEntity> {

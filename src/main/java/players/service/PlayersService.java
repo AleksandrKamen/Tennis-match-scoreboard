@@ -1,10 +1,10 @@
 package players.service;
 
 import exception.ValidationException;
-import players.dto.CreatePlayersDto;
-import players.dto.ReadPlayersDto;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
+import players.dto.CreatePlayersDto;
+import players.dto.ReadPlayersDto;
 import players.mapper.CreatePlayersMapper;
 import players.mapper.ReadPlayersMapper;
 import players.repository.PlayersRepository;
@@ -43,12 +43,14 @@ public static PlayersService openService(EntityManager entityManager){
             playersRepository.save(playersEntity);
         }
     }
-
 public Optional<ReadPlayersDto> findPlayerByName(String name){
     return playersRepository.findByName(name)
             .map(readPlayersMapper::mapFrom);
 }
-
-
+public List<ReadPlayersDto> findAllPlayers(){
+    return playersRepository.findAll().stream()
+            .map(readPlayersMapper::mapFrom)
+            .toList();
+}
 
 }

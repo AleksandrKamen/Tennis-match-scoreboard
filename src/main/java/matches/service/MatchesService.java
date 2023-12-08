@@ -19,7 +19,7 @@ public class MatchesService {
     private final ReadMatchesMapper readMatchesMapper;
     private final PlayersRepository playersRepository;
 
-    public static MatchesService openService(EntityManager entityManager){
+    public static MatchesService openService(EntityManager entityManager) {
         var mathesRepository = new MathesRepository(entityManager);
         var playersRepository = new PlayersRepository(entityManager);
         var createMathesMapper = new CreateMathesMapper(playersRepository);
@@ -27,12 +27,14 @@ public class MatchesService {
         return new MatchesService(mathesRepository, createMathesMapper, readMatchesMapper, playersRepository);
     }
 
-  public CreateMathesDto createMatch(CreateMathesDto createMathesDto){
-      var matchesEntity = createMathesMapper.mapFrom(createMathesDto);
-      mathesRepository.save(matchesEntity);
-      return createMathesDto;
-  }  public void createMatches(List<String> playersNames){
-        for (int i = 0; i < playersNames.size()-1; i+=2) {
+    public CreateMathesDto createMatch(CreateMathesDto createMathesDto) {
+        var matchesEntity = createMathesMapper.mapFrom(createMathesDto);
+        mathesRepository.save(matchesEntity);
+        return createMathesDto;
+    }
+
+    public void createMatches(List<String> playersNames) {
+        for (int i = 0; i < playersNames.size() - 1; i += 2) {
             boolean rnd = Math.random() > 0.5;
             var createMathesDto = CreateMathesDto.builder()
                     .player1(playersNames.get(i))
@@ -42,42 +44,42 @@ public class MatchesService {
             var matchesEntity = createMathesMapper.mapFrom(createMathesDto);
             mathesRepository.save(matchesEntity);
         }
-  }
-
- public List<ReadMatchesDto> findAllMatches(){
-     return mathesRepository.findAll()
-             .stream()
-             .map(readMatchesMapper::mapFrom)
-             .toList();
- }
-
- public List<ReadMatchesDto> findMatchesWithPagination(int page){
-         int offset = page * 7 - 7;
-         int limit =  7;
-         return mathesRepository.findMatchesWithPagination(offset,limit).stream()
-                 .map(readMatchesMapper::mapFrom)
-                 .toList();
- }
-
- public List<ReadMatchesDto> findMatchesByPlayerName(String playerName){
-    var mabyPlayer = playersRepository.findByName(playerName);
-    if (mabyPlayer.isPresent()){
-       return mathesRepository.findByPlayerId(mabyPlayer.get().getId()).stream()
-               .map(readMatchesMapper::mapFrom)
-               .toList();
     }
-    return Collections.emptyList();
- }
- public List<ReadMatchesDto> findMatchesByPlayerName(String playerName, int page){
-     int offset = page * 7 - 7;
-     int limit =  7;
-    var mabyPlayer = playersRepository.findByName(playerName);
-    if (mabyPlayer.isPresent()){
-       return mathesRepository.findByPlayerId(mabyPlayer.get().getId(), offset,limit).stream()
-               .map(readMatchesMapper::mapFrom)
-               .toList();
-    }
-    return Collections.emptyList();
- }
 
+    public List<ReadMatchesDto> findAllMatches() {
+        return mathesRepository.findAll()
+                .stream()
+                .map(readMatchesMapper::mapFrom)
+                .toList();
+    }
+
+    public List<ReadMatchesDto> findMatchesWithPagination(int page) {
+        int offset = page * 7 - 7;
+        int limit = 7;
+        return mathesRepository.findMatchesWithPagination(offset, limit).stream()
+                .map(readMatchesMapper::mapFrom)
+                .toList();
+    }
+
+    public List<ReadMatchesDto> findMatchesByPlayerName(String playerName) {
+        var mabyPlayer = playersRepository.findByName(playerName);
+        if (mabyPlayer.isPresent()) {
+            return mathesRepository.findByPlayerId(mabyPlayer.get().getId()).stream()
+                    .map(readMatchesMapper::mapFrom)
+                    .toList();
+        }
+        return Collections.emptyList();
+    }
+
+    public List<ReadMatchesDto> findMatchesByPlayerName(String playerName, int page) {
+        int offset = page * 7 - 7;
+        int limit = 7;
+        var mabyPlayer = playersRepository.findByName(playerName);
+        if (mabyPlayer.isPresent()) {
+            return mathesRepository.findByPlayerId(mabyPlayer.get().getId(), offset, limit).stream()
+                    .map(readMatchesMapper::mapFrom)
+                    .toList();
+        }
+        return Collections.emptyList();
+    }
 }

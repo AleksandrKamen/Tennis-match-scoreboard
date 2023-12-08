@@ -18,7 +18,7 @@ public class DataImporterUtil {
             var playersService = PlayersService.openService(entityManager);
 
             entityManager.getTransaction().begin();
-     var names = List.of("Novak Djokovic", "Rafael Nadal","Daniil Medvedev","Carlos Alcaraz Garfia",
+            var names = List.of("Novak Djokovic", "Rafael Nadal","Daniil Medvedev","Carlos Alcaraz Garfia",
              "Stefanos Tsitsipas","Sebastian Korda","Tomas Martin Etcheverry", "Sebastian Ofner","Taylor Harry Fritz",
              "Dominic Stephan Stricker","Quentin Halys", "Matteo Berrettini","Albert Ramos-Vinolas","Jeff Wolf",
              "Alex Michelsen","Jaume Antoni Munar Clar", "Christian Garin","Bernabe Zapata Miralles","Dominik Koepfer",

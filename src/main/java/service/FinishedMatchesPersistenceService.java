@@ -35,14 +35,10 @@ public class FinishedMatchesPersistenceService { // инкапсулирует �
 
     try {
         playersService.createPlayer(CreatePlayersDto.builder().name(createMathesDto.getPlayer2()).build());
-    } catch (ValidationException e){
-
-    }
+    } catch (ValidationException e){}
     try {
         playersService.createPlayer(CreatePlayersDto.builder().name(createMathesDto.getPlayer1()).build());
-    } catch (ValidationException e){
-
-    }
+    } catch (ValidationException e){}
         entityManager.getTransaction().commit();
     }
     public void saveMatch(CreateMathesDto createMathesDto){
