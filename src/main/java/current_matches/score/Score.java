@@ -1,4 +1,4 @@
-package current_matches;
+package current_matches.score;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,5 +29,5 @@ public abstract class Score<T> { //абстарктный класс для вс
         playerScore.set(playerNumber == 0?1:0,score);
     }
 
-    public abstract State playerWon (int playerNumber);
+    public abstract MatchState playerWon (int playerNumber);
 }

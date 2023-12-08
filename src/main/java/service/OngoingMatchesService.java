@@ -22,11 +22,7 @@ public class OngoingMatchesService { // Сервис хранит текущие
         UUID uuid = UUID.randomUUID();
         var player1 = CreatePlayersDto.builder().name(player1Name).build();
         var player2 = CreatePlayersDto.builder().name(player2Name).build();
-        var newMatch = CurrentMatches.builder()
-                .player1(player1)
-                .player2(player2)
-                .uuid(uuid)
-                .build();
+        var newMatch = new CurrentMatches(uuid, player1,player2);
         ongoingMatches.put(uuid, newMatch);
     }
     public void removeMatch(UUID uuid) {

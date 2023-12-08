@@ -65,7 +65,7 @@ public class FinishedMatchesPersistenceService { // инкапсулирует �
         return CreateMathesDto.builder()
                 .player1(matches.getPlayer1().getName())
                 .player2(matches.getPlayer2().getName())
-                .winner(matches.getScore().getWinner().getName())
+//                .winner(matches.getScore().getWinner())
                 .build();
     }
 }
