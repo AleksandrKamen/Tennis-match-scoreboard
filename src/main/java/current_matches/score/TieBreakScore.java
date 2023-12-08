@@ -7,7 +7,7 @@ public class TieBreakScore extends Score<Integer>{
     }
 
     @Override
-    public MatchState playerWon(int playerNumber) {
+    public MatchState pointWon(int playerNumber) {
         setPlayerScore(playerNumber,getPlayerScore(playerNumber)+1);
         var playerScore = getPlayerScore(playerNumber); // Получаем счет нашего игрока
         if (playerScore == 6){

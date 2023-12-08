@@ -23,9 +23,9 @@ class RegularGameScoreTest {
     @Test
     void pointWon(){
         for (int i = 0; i <3; i++) {
-            assertEquals(pointScore.playerWon(0), MatchState.NOT_OVER);
+            assertEquals(pointScore.pointWon(0), MatchState.NOT_OVER);
         }
-        assertEquals(pointScore.playerWon(0), MatchState.FIRST_PLAYER_WINS);
+        assertEquals(pointScore.pointWon(0), MatchState.FIRST_PLAYER_WINS);
     }
 
     @Test
@@ -35,19 +35,19 @@ class RegularGameScoreTest {
         assertAll(
                 ()-> assertEquals(pointScore.getPlayerScore(0), PointValues.ZERO),
                 ()-> assertEquals(pointScore.getPlayerScore(1), PointValues.ZERO),
-                () -> assertEquals(pointScore.playerWon(0), MatchState.NOT_OVER),
-                () -> assertEquals(pointScore.playerWon(0), MatchState.NOT_OVER)
+                () -> assertEquals(pointScore.pointWon(0), MatchState.NOT_OVER),
+                () -> assertEquals(pointScore.pointWon(0), MatchState.NOT_OVER)
         );
         assertAll(
-                () -> assertEquals(pointScore.playerWon(1), MatchState.NOT_OVER),
-                () -> assertEquals(pointScore.playerWon(1), MatchState.NOT_OVER),
+                () -> assertEquals(pointScore.pointWon(1), MatchState.NOT_OVER),
+                () -> assertEquals(pointScore.pointWon(1), MatchState.NOT_OVER),
                 ()-> assertEquals(pointScore.getPlayerScore(0), PointValues.THIRTY),
                 ()-> assertEquals(pointScore.getPlayerScore(1), PointValues.THIRTY)
         );
-               pointScore.playerWon(0);
-               pointScore.playerWon(1);
+               pointScore.pointWon(0);
+               pointScore.pointWon(1);
         assertAll (
-            () -> assertEquals(pointScore.playerWon(0), MatchState.NOT_OVER),
+            () -> assertEquals(pointScore.pointWon(0), MatchState.NOT_OVER),
             () -> assertEquals(pointScore.getPlayerScore(0), PointValues.ADVANTAGE)
         );
   }
@@ -55,25 +55,25 @@ class RegularGameScoreTest {
     @DisplayName("return state - FIRST_PLAYER_WINS, if score 40:x<40")
     void firstPlayerWins() {
         pointScore.setPlayerScore(0, PointValues.FORTY);
-        assertEquals(pointScore.playerWon(0), MatchState.FIRST_PLAYER_WINS);
+        assertEquals(pointScore.pointWon(0), MatchState.FIRST_PLAYER_WINS);
     }
     @Test
     @DisplayName("return state - SECOND_PLAYER_WINS, if score x<40:40")
     void secondPlayerWins() {
         pointScore.setPlayerScore(1, PointValues.FORTY);
-        assertEquals(pointScore.playerWon(1), MatchState.SECOND_PLAYER_WINS);
+        assertEquals(pointScore.pointWon(1), MatchState.SECOND_PLAYER_WINS);
     }
     @Test
     @DisplayName("return state - FIRST_PLAYER_WINS, if him score = ADVANTAGE")
     void firstPlayerWinsIfAdvantage() {
         pointScore.setPlayerScore(0, PointValues.ADVANTAGE);
-        assertEquals(pointScore.playerWon(0), MatchState.FIRST_PLAYER_WINS);
+        assertEquals(pointScore.pointWon(0), MatchState.FIRST_PLAYER_WINS);
     }
     @Test
     @DisplayName("return state - SECOND_PLAYER_WINS, if him score = ADVANTAGE")
     void secondPlayerWinsIfAdvantage() {
         pointScore.setPlayerScore(1, PointValues.ADVANTAGE);
-        assertEquals(pointScore.playerWon(1), MatchState.SECOND_PLAYER_WINS);
+        assertEquals(pointScore.pointWon(1), MatchState.SECOND_PLAYER_WINS);
     }
     @Test
     @DisplayName("throw exception if invalid point name")

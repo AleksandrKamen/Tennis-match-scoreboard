@@ -1,5 +1,6 @@
 package players.service;
 
+import exception.ValidationException;
 import players.dto.CreatePlayersDto;
 import players.dto.ReadPlayersDto;
 import jakarta.persistence.EntityManager;
@@ -7,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import players.mapper.CreatePlayersMapper;
 import players.mapper.ReadPlayersMapper;
 import players.repository.PlayersRepository;
+import validator.Error;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,12 +25,15 @@ public static PlayersService openService(EntityManager entityManager){
     return new PlayersService(playersRepository,readPlayersMapper,createPlayersMapper);
 }
  public ReadPlayersDto createPlayer(CreatePlayersDto createPlayersDto){
+     // TODO: 08.12.2023 Валидация на наличие в БД
+     if (playersRepository.findByName(createPlayersDto.getName()).isPresent()){
+         throw new ValidationException(List.of(Error.of(400,"Игрок уже есть в бд")));
+     }
      var playersEntity = createPlayersMapper.mapFrom(createPlayersDto);
      var save = playersRepository.save(playersEntity);
      var readPlayersDto = readPlayersMapper.mapFrom(save);
      return readPlayersDto;
  }
-
     public void createPlayers(List<String> playersNames){
         for (String playersName : playersNames) {
             var playersEntity = createPlayersMapper.mapFrom(

@@ -26,16 +26,16 @@ class GameScoreTest {
         @DisplayName("return state - game is not over, if score first player < 5 and score second player < 5")
         void gameIsNotOver(String setPoint) {
             gameScore.setPlayerScore(0, GameValues.valueOf(setPoint));
-            assertEquals(gameScore.playerWon(0), MatchState.NOT_OVER);
+            assertEquals(gameScore.pointWon(0), MatchState.NOT_OVER);
             gameScore.setPlayerScore(1, GameValues.valueOf(setPoint));
-            assertEquals(gameScore.playerWon(1), MatchState.NOT_OVER);
+            assertEquals(gameScore.pointWon(1), MatchState.NOT_OVER);
         }
         @Test
         @DisplayName("return state - game is not over, if score first player = 6 and score second player = 5")
         void gameIsNotOverIfScoreSixFive() {
             gameScore.setPlayerScore(0, GameValues.FIVE);
             gameScore.setPlayerScore(1, GameValues.FIVE);
-            assertEquals(gameScore.playerWon(0), MatchState.NOT_OVER);
+            assertEquals(gameScore.pointWon(0), MatchState.NOT_OVER);
         }
     }
     @Nested
@@ -68,9 +68,9 @@ class GameScoreTest {
             assertEquals(gameScore.gameWon(0), MatchState.NOT_OVER);
 
             for (int i = 0; i <5; i++) {
-                assertEquals(gameScore.playerWon(0), MatchState.NOT_OVER);
+                assertEquals(gameScore.pointWon(0), MatchState.NOT_OVER);
             }
-            assertEquals(gameScore.playerWon(0), MatchState.FIRST_PLAYER_WINS);
+            assertEquals(gameScore.pointWon(0), MatchState.FIRST_PLAYER_WINS);
 
         }
         @ParameterizedTest
@@ -79,9 +79,9 @@ class GameScoreTest {
         void gameNotOver(int tieBreakPoint){
             var tieBreak = new TieBreakScore();
             tieBreak.setPlayerScore(0,tieBreakPoint);
-            assertEquals(gameScore.playerWon(0), MatchState.NOT_OVER);
+            assertEquals(gameScore.pointWon(0), MatchState.NOT_OVER);
             tieBreak.setPlayerScore(1,tieBreakPoint);
-            assertEquals(gameScore.playerWon(1), MatchState.NOT_OVER);
+            assertEquals(gameScore.pointWon(1), MatchState.NOT_OVER);
         }
         @ParameterizedTest
         @ValueSource(ints = {6,7,12,14})
@@ -90,8 +90,8 @@ class GameScoreTest {
             var tieBreak = new TieBreakScore();
             tieBreak.setPlayerScore(0,tieBreakPoint);
             tieBreak.setPlayerScore(1,tieBreakPoint);
-            assertEquals(gameScore.playerWon(0), MatchState.NOT_OVER);
-            assertEquals(gameScore.playerWon(1), MatchState.NOT_OVER);
+            assertEquals(gameScore.pointWon(0), MatchState.NOT_OVER);
+            assertEquals(gameScore.pointWon(1), MatchState.NOT_OVER);
         }
         @ParameterizedTest
         @ValueSource(ints = {0,1,2,3,4})
@@ -100,11 +100,11 @@ class GameScoreTest {
             var tieBreak = new TieBreakScore();
             tieBreak.setPlayerScore(0,5);
             tieBreak.setPlayerScore(1,tieBreakPoint);
-            assertEquals(tieBreak.playerWon(0), MatchState.FIRST_PLAYER_WINS);
+            assertEquals(tieBreak.pointWon(0), MatchState.FIRST_PLAYER_WINS);
 
             tieBreak.setPlayerScore(0,tieBreakPoint);
             tieBreak.setPlayerScore(1,5);
-            assertEquals(tieBreak.playerWon(1), MatchState.SECOND_PLAYER_WINS);
+            assertEquals(tieBreak.pointWon(1), MatchState.SECOND_PLAYER_WINS);
         }
         @ParameterizedTest
         @ValueSource(ints = {7,8,9,10,11,12,13,14,15})
@@ -113,11 +113,11 @@ class GameScoreTest {
             var tieBreak = new TieBreakScore();
             tieBreak.setPlayerScore(0,tieBreakPoint+1);
             tieBreak.setPlayerScore(1,tieBreakPoint);
-            assertEquals(tieBreak.playerWon(0), MatchState.FIRST_PLAYER_WINS);
+            assertEquals(tieBreak.pointWon(0), MatchState.FIRST_PLAYER_WINS);
 
             tieBreak.setPlayerScore(0,tieBreakPoint);
             tieBreak.setPlayerScore(1,tieBreakPoint+1);
-            assertEquals(tieBreak.playerWon(1), MatchState.SECOND_PLAYER_WINS);
+            assertEquals(tieBreak.pointWon(1), MatchState.SECOND_PLAYER_WINS);
         }
     }
 

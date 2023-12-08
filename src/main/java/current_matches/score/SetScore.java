@@ -15,8 +15,8 @@ public class SetScore extends Score<SetValues>{
     }
 
     @Override
-    public MatchState playerWon(int playerNumber) {
-        MatchState state = gameScore.playerWon(playerNumber);
+    public MatchState pointWon(int playerNumber) {
+        MatchState state = gameScore.pointWon(playerNumber);
 
         if (state == MatchState.FIRST_PLAYER_WINS){
             return setWon(0);

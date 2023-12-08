@@ -23,9 +23,9 @@ class MatchScoreTest {
     @DisplayName("return state: FIRST_PLAYER_WINS, if score first player = 48")
     void playerWins(){
         for (int i = 0; i <47; i++) {
-            assertEquals(matchScore.playerWon(0), MatchState.NOT_OVER);
+            assertEquals(matchScore.pointWon(0), MatchState.NOT_OVER);
         }
-        assertEquals(matchScore.playerWon(0), MatchState.FIRST_PLAYER_WINS);
+        assertEquals(matchScore.pointWon(0), MatchState.FIRST_PLAYER_WINS);
     }
 
 

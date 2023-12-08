@@ -10,7 +10,7 @@ public class CurrentMatches {
     private final UUID uuid;
     private final CreatePlayersDto player1;
     private final CreatePlayersDto player2;
-    private CreatePlayersDto winner = null;
+    private CreatePlayersDto winner;
     private MatchScore score;
     public CurrentMatches(UUID uuid, CreatePlayersDto player1, CreatePlayersDto player2) {
         this.uuid = uuid;

@@ -14,12 +14,12 @@ public class GameScore extends Score<GameValues> {
         return GameValues.ZERO;
     }
     @Override
-    public MatchState playerWon(int playerNumber) {
+    public MatchState pointWon(int playerNumber) {
         if (tieBreakTime){
-            return tieBreak.playerWon(playerNumber);
+            return tieBreak.pointWon(playerNumber);
         }
 
-       var state = pointScore.playerWon(playerNumber);
+       var state = pointScore.pointWon(playerNumber);
 
        if (state == MatchState.FIRST_PLAYER_WINS){
            return gameWon(0);

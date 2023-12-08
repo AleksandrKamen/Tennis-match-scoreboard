@@ -17,13 +17,14 @@ public class OngoingMatchesService { // Сервис хранит текущие
     public static OngoingMatchesService getInstance() {
         return INSTANCE;
     }
-    public void creatNewMatch(String player1Name, String player2Name) {
+    public CurrentMatches creatNewMatch(String player1Name, String player2Name) {
         // TODO: 05.12.2023 Валидация на имена
         UUID uuid = UUID.randomUUID();
         var player1 = CreatePlayersDto.builder().name(player1Name).build();
         var player2 = CreatePlayersDto.builder().name(player2Name).build();
         var newMatch = new CurrentMatches(uuid, player1,player2);
         ongoingMatches.put(uuid, newMatch);
+        return newMatch;
     }
     public void removeMatch(UUID uuid) {
         ongoingMatches.remove(uuid);

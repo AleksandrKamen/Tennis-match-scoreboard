@@ -29,5 +29,5 @@ public abstract class Score<T> { //абстарктный класс для вс
         playerScore.set(playerNumber == 0?1:0,score);
     }
 
-    public abstract MatchState playerWon (int playerNumber);
+    public abstract MatchState pointWon(int playerNumber);
 }

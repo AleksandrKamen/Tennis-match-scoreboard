@@ -13,6 +13,7 @@ public class PlayersRepository extends BaseRepository<Integer, PlayersEntity> {
     public PlayersRepository(EntityManager entityManager){
         super(PlayersEntity.class, entityManager);
     }
+
     public Optional<PlayersEntity> findByName(String name){
         var entityManager = getEntityManager();
         var cb = entityManager.getCriteriaBuilder();
@@ -21,6 +22,6 @@ public class PlayersRepository extends BaseRepository<Integer, PlayersEntity> {
         criteria.select(players)
                 .where(cb.equal(players
                 .get(PlayersEntity_.NAME),name));
-        return Optional.ofNullable(entityManager.createQuery(criteria).getSingleResult());
+       return entityManager.createQuery(criteria).getResultStream().findFirst();
     }
 }

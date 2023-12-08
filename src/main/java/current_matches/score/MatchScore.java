@@ -9,8 +9,8 @@ public class MatchScore extends Score<MatchValues> { // Класс описыв�
         return MatchValues.ZERO;
     }
     @Override
-    public MatchState playerWon(int playerNumber) {
-        MatchState state = setScore.playerWon(playerNumber);
+    public MatchState pointWon(int playerNumber) {
+        MatchState state = setScore.pointWon(playerNumber);
 
         if (state == MatchState.FIRST_PLAYER_WINS){
             return matchWon(0);

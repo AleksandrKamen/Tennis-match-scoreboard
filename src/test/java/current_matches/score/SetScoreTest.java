@@ -21,8 +21,8 @@ class SetScoreTest {
     @DisplayName("return state: FIRST_PLAYER_WINS, if score first player = 24")
     void playerWins(){
         for (int i = 0; i <23; i++) {
-            assertEquals(setScore.playerWon(0), MatchState.NOT_OVER);
+            assertEquals(setScore.pointWon(0), MatchState.NOT_OVER);
         }
-        assertEquals(setScore.playerWon(0), MatchState.FIRST_PLAYER_WINS);
+        assertEquals(setScore.pointWon(0), MatchState.FIRST_PLAYER_WINS);
     }
 }

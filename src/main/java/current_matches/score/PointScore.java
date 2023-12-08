@@ -8,7 +8,7 @@ public class PointScore extends Score<PointValues> {
         return PointValues.ZERO;
     }
     @Override
-    public MatchState playerWon(int playerNumber) {
+    public MatchState pointWon(int playerNumber) {
         PointValues playerScore = getPlayerScore(playerNumber); // Получаем счет нашего игрока
 
         if (playerScore.ordinal() <= PointValues.THIRTY.ordinal()) {
