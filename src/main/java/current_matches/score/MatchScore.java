@@ -2,6 +2,8 @@ package current_matches.score;
 
 import current_matches.score.values.MatchValues;
 
+import java.util.List;
+
 public class MatchScore extends Score<MatchValues> { // Класс описывающий счет матча
   private SetScore setScore = new SetScore();
     @Override
@@ -29,4 +31,5 @@ public class MatchScore extends Score<MatchValues> { // Класс описыв�
         } else return MatchState.NOT_OVER;
 
     }
+
 }

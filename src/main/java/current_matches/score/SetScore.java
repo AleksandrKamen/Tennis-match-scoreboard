@@ -13,7 +13,6 @@ public class SetScore extends Score<SetValues>{
     protected SetValues getZeroScore() {
         return SetValues.ZERO;
     }
-
     @Override
     public MatchState pointWon(int playerNumber) {
         MatchState state = gameScore.pointWon(playerNumber);

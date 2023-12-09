@@ -1,9 +1,12 @@
 package current_matches.score;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Score<T> { //абстарктный класс для всех счетов (гейм,сет,матч)
+    @Getter
     private final List<T> playerScore = new ArrayList<>(); // пара значений
 
     protected abstract T getZeroScore();
@@ -30,4 +33,6 @@ public abstract class Score<T> { //абстарктный класс для вс
     }
 
     public abstract MatchState pointWon(int playerNumber);
+
+
 }

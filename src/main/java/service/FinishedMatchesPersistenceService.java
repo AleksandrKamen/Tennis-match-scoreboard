@@ -19,12 +19,10 @@ public class FinishedMatchesPersistenceService { // инкапсулирует �
    public static FinishedMatchesPersistenceService getInstance(){return INSTANCE;}
 
     public void finishMatch(CurrentMatches match){
-        //todo Валидация на то что есть такой матч
         var createMathesDto = getCreateMatchesDto(match);
         savePlayersIfDontExist(createMathesDto);
         saveMatch(createMathesDto);
     }
-
     public void savePlayersIfDontExist(CreateMathesDto createMathesDto){
 
         var sessionFactory = HibernateUtil.getSessionFactory();
@@ -54,7 +52,6 @@ public class FinishedMatchesPersistenceService { // инкапсулирует �
 
         entityManager.getTransaction().commit();
     }
-
     private CreateMathesDto getCreateMatchesDto(CurrentMatches matches){
         return CreateMathesDto.builder()
                 .player1(matches.getPlayer1().getName())

@@ -10,4 +10,14 @@ public enum PointValues implements Values<PointValues> {
             return PointValues.values()[this.ordinal() + 1];
         }
     }
+
+    public String getValues(){
+        return switch (this){
+            case ZERO -> "0";
+            case FIFTEEN -> "15";
+            case THIRTY -> "30";
+            case FORTY -> "40";
+            case ADVANTAGE -> "AD";
+        };
+    }
 }

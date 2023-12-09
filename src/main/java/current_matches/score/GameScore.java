@@ -1,9 +1,11 @@
 package current_matches.score;
 
 import current_matches.score.values.GameValues;
+import lombok.Getter;
 
 public class GameScore extends Score<GameValues> {
     private TieBreakScore tieBreak;
+    @Getter
     private PointScore pointScore;
     private boolean tieBreakTime = false;
     public GameScore() {
@@ -18,7 +20,6 @@ public class GameScore extends Score<GameValues> {
         if (tieBreakTime){
             return tieBreak.pointWon(playerNumber);
         }
-
        var state = pointScore.pointWon(playerNumber);
 
        if (state == MatchState.FIRST_PLAYER_WINS){
