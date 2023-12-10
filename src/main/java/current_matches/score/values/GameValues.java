@@ -11,7 +11,6 @@ public enum GameValues implements Values<GameValues> {
             return GameValues.values()[this.ordinal()+1];
         }
     }
-
     public String getValue(){
         return switch (this){
             case ZERO -> "0";

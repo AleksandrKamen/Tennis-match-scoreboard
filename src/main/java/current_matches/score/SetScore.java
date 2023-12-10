@@ -18,11 +18,11 @@ public class SetScore extends Score<SetValues>{
     }
     @Override
     public MatchState pointWon(int playerNumber) {
-        MatchState state = gameScore.pointWon(playerNumber);
+        var matchState = gameScore.pointWon(playerNumber);
 
-        if (state == MatchState.FIRST_PLAYER_WINS){
+        if (matchState == MatchState.FIRST_PLAYER_WINS){
             return setWon(0);
-        } else if(state == MatchState.SECOND_PLAYER_WINS) {
+        } else if(matchState == MatchState.SECOND_PLAYER_WINS) {
             return setWon(1);
         }
         return MatchState.NOT_OVER;

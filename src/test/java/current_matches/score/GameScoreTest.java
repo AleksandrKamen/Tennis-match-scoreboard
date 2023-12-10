@@ -67,15 +67,15 @@ class GameScoreTest {
             gameScore.setPlayerScore(1, GameValues.SIX);
             assertEquals(gameScore.gameWon(0), MatchState.NOT_OVER);
 
-            for (int i = 0; i <5; i++) {
+            for (int i = 0; i <6; i++) {
                 assertEquals(gameScore.pointWon(0), MatchState.NOT_OVER);
             }
             assertEquals(gameScore.pointWon(0), MatchState.FIRST_PLAYER_WINS);
 
         }
         @ParameterizedTest
-        @ValueSource(ints = {1,2,3,4,5})
-        @DisplayName("return state - game is not over, if score first player < 6 and score second player < 6")
+        @ValueSource(ints = {1,2,3,4,5,6})
+        @DisplayName("return state - game is not over, if score first player < 7 and score second player < 7")
         void gameNotOver(int tieBreakPoint){
             var tieBreak = new TieBreakScore();
             tieBreak.setPlayerScore(0,tieBreakPoint);
@@ -94,22 +94,22 @@ class GameScoreTest {
             assertEquals(gameScore.pointWon(1), MatchState.NOT_OVER);
         }
         @ParameterizedTest
-        @ValueSource(ints = {0,1,2,3,4})
-        @DisplayName("return state - player first or second wins, if score 6:x<5 or x<5:6")
+        @ValueSource(ints = {0,1,2,3,4,5})
+        @DisplayName("return state - player first or second wins, if score 7:x<=5 or x<=5:7")
         void firstOrSecondPlayerWins(int tieBreakPoint){
             var tieBreak = new TieBreakScore();
-            tieBreak.setPlayerScore(0,5);
+            tieBreak.setPlayerScore(0,6);
             tieBreak.setPlayerScore(1,tieBreakPoint);
             assertEquals(tieBreak.pointWon(0), MatchState.FIRST_PLAYER_WINS);
 
             tieBreak.setPlayerScore(0,tieBreakPoint);
-            tieBreak.setPlayerScore(1,5);
+            tieBreak.setPlayerScore(1,6);
             assertEquals(tieBreak.pointWon(1), MatchState.SECOND_PLAYER_WINS);
         }
         @ParameterizedTest
         @ValueSource(ints = {7,8,9,10,11,12,13,14,15})
         @DisplayName("return state - player first or second wins, if difference between players = 2")
-        void firstOrSecondPlayerWinsIfScoreMereTwo(int tieBreakPoint){
+        void firstOrSecondPlayerWinsIfScoreMoreTwo(int tieBreakPoint){
             var tieBreak = new TieBreakScore();
             tieBreak.setPlayerScore(0,tieBreakPoint+1);
             tieBreak.setPlayerScore(1,tieBreakPoint);

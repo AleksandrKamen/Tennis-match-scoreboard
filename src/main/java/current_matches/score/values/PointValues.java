@@ -10,7 +10,6 @@ public enum PointValues implements Values<PointValues> {
             return PointValues.values()[this.ordinal() + 1];
         }
     }
-
     public String getValues(){
         return switch (this){
             case ZERO -> "0";

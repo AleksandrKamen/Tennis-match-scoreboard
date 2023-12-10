@@ -14,6 +14,7 @@ import util.HibernateUtil;
 
 import java.lang.reflect.Proxy;
 
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class FinishedMatchesPersistenceService { // инкапсулирует чтение и запись законченных матчей в БД
   private static final FinishedMatchesPersistenceService INSTANCE = new FinishedMatchesPersistenceService();
@@ -24,6 +25,7 @@ public class FinishedMatchesPersistenceService { // инкапсулирует �
         savePlayersIfDontExist(createMathesDto);
         saveMatch(createMathesDto);
     }
+
     public void savePlayersIfDontExist(CreateMathesDto createMathesDto){
 
         var sessionFactory = HibernateUtil.getSessionFactory();

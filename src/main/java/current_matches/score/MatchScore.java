@@ -17,11 +17,11 @@ public class MatchScore extends Score<MatchValues> { // Класс описыв�
     @Override
     public MatchState pointWon(int playerNumber) {
 
-        MatchState state = setScore.pointWon(playerNumber);
+        var matchState = setScore.pointWon(playerNumber);
 
-        if (state == MatchState.FIRST_PLAYER_WINS){
+        if (matchState == MatchState.FIRST_PLAYER_WINS){
             return matchWon(0);
-        } else if(state == MatchState.SECOND_PLAYER_WINS) {
+        } else if(matchState == MatchState.SECOND_PLAYER_WINS) {
             return matchWon(1);
         }
         return MatchState.NOT_OVER;
@@ -45,7 +45,6 @@ public class MatchScore extends Score<MatchValues> { // Класс описыв�
             return playerNumber == 0 ? MatchState.FIRST_PLAYER_WINS : MatchState.SECOND_PLAYER_WINS;
         } else return MatchState.NOT_OVER;
     }
-
     public List<String> getCurrentPlayerScore(int playerNumber){
 
             return List.of(
