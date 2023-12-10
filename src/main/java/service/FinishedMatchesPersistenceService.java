@@ -2,15 +2,16 @@ package service;
 
 import current_matches.CurrentMatches;
 import exception.ValidationException;
-import matches.dto.CreateMathesDto;
-import players.dto.CreatePlayersDto;
 import jakarta.persistence.EntityManager;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import org.hibernate.Session;
+import matches.dto.CreateMathesDto;
 import matches.service.MatchesService;
+import org.hibernate.Session;
+import players.dto.CreatePlayersDto;
 import players.service.PlayersService;
 import util.HibernateUtil;
+
 import java.lang.reflect.Proxy;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -19,7 +20,7 @@ public class FinishedMatchesPersistenceService { // инкапсулирует �
    public static FinishedMatchesPersistenceService getInstance(){return INSTANCE;}
 
     public void finishMatch(CurrentMatches match){
-        var createMathesDto = getCreateMatchesDto(match);
+        var createMathesDto = buildCreateMatchesDto(match);
         savePlayersIfDontExist(createMathesDto);
         saveMatch(createMathesDto);
     }
@@ -32,11 +33,19 @@ public class FinishedMatchesPersistenceService { // инкапсулирует �
         entityManager.getTransaction().begin();
 
     try {
-        playersService.createPlayer(CreatePlayersDto.builder().name(createMathesDto.getPlayer2()).build());
+        playersService.createPlayer(CreatePlayersDto
+                .builder()
+                .name(createMathesDto.getPlayer1())
+                .build());
     } catch (ValidationException e){}
     try {
-        playersService.createPlayer(CreatePlayersDto.builder().name(createMathesDto.getPlayer1()).build());
+        playersService.createPlayer(
+                CreatePlayersDto
+                        .builder()
+                        .name(createMathesDto.getPlayer2())
+                        .build());
     } catch (ValidationException e){}
+
         entityManager.getTransaction().commit();
     }
     public void saveMatch(CreateMathesDto createMathesDto){
@@ -52,7 +61,7 @@ public class FinishedMatchesPersistenceService { // инкапсулирует �
 
         entityManager.getTransaction().commit();
     }
-    private CreateMathesDto getCreateMatchesDto(CurrentMatches matches){
+    private CreateMathesDto buildCreateMatchesDto(CurrentMatches matches){
         return CreateMathesDto.builder()
                 .player1(matches.getPlayer1().getName())
                 .player2(matches.getPlayer2().getName())

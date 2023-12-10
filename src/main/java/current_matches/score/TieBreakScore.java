@@ -19,7 +19,12 @@ public class TieBreakScore extends Score<Integer>{
         else if (playerScore > 6 && playerScore - getOppositeScore(playerNumber) == 2){
             return playerNumber == 0 ? MatchState.FIRST_PLAYER_WINS : MatchState.SECOND_PLAYER_WINS;
         }
-
         return MatchState.NOT_OVER;
+    }
+
+    public String getCurrentScore(int playerNumber){
+        return getPlayerScore()
+                .get(playerNumber)
+                .toString();
     }
 }

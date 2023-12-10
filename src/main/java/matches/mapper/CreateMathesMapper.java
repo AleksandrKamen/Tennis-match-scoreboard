@@ -9,7 +9,6 @@ import players.repository.PlayersRepository;
 @RequiredArgsConstructor
 public class CreateMathesMapper implements Mapper<CreateMathesDto, MatchesEntity> {
    private final PlayersRepository playersRepository;
-
     @Override
     public MatchesEntity mapFrom(CreateMathesDto object) {
 

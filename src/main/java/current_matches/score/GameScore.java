@@ -1,11 +1,12 @@
 package current_matches.score;
 
 import current_matches.score.values.GameValues;
-import lombok.Getter;
+
+import java.util.List;
 
 public class GameScore extends Score<GameValues> {
+
     private TieBreakScore tieBreak;
-    @Getter
     private PointScore pointScore;
     private boolean tieBreakTime = false;
     public GameScore() {
@@ -47,4 +48,18 @@ public class GameScore extends Score<GameValues> {
         }
         return MatchState.NOT_OVER;
     }
+
+    public List<String> getCurrentPlayerScore(int playerNumber){
+        if (tieBreakTime){
+            return List.of(
+                    getPlayerScore().get(playerNumber).getValue() + "/"+ tieBreak.getCurrentScore(playerNumber),
+                    pointScore.getCurrentPlayerScore(playerNumber)
+            );
+        }
+        return List.of(
+                getPlayerScore().get(playerNumber).getValue(),
+                pointScore.getCurrentPlayerScore(playerNumber)
+        );
+    }
+
 }

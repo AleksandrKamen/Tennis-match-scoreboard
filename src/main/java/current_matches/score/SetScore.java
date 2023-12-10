@@ -1,10 +1,13 @@
 package current_matches.score;
-
 import current_matches.score.values.SetValues;
+import lombok.Getter;
+import java.util.List;
 
 public class SetScore extends Score<SetValues>{
-   private GameScore gameScore;
+    @Getter
+    private List<String> setResult = List.of("0","0");
 
+   private GameScore gameScore;
     public SetScore() {
         this.gameScore = new GameScore();
     }
@@ -26,7 +29,18 @@ public class SetScore extends Score<SetValues>{
     }
 
     public MatchState setWon(int playerNumber){
+        setResult = List.of(gameScore.getCurrentPlayerScore(0).get(0),gameScore.getCurrentPlayerScore(1).get(0));
+
+        setPlayerScore(playerNumber,getPlayerScore(playerNumber).getNextValues());
         this.gameScore = new GameScore();
         return playerNumber == 0 ? MatchState.FIRST_PLAYER_WINS : MatchState.SECOND_PLAYER_WINS;
+    }
+
+    public List<String> getCurrentPlayerScore(int playerNumber) {
+            return List.of(
+                    getPlayerScore().get(playerNumber).getValues(),
+                    gameScore.getCurrentPlayerScore(playerNumber).get(0),
+                    gameScore.getCurrentPlayerScore(playerNumber).get(1)
+            );
     }
 }

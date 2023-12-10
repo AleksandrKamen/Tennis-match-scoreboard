@@ -14,6 +14,7 @@ public class MatchScoreCalculationService {
   public void updateScore(UUID uuid, int plalerNumber){
       var currentMatch = ongoingMatchesService.getMatch(uuid).get();
       var matchState = currentMatch.getScore().pointWon(plalerNumber);
+
       if (matchState == MatchState.FIRST_PLAYER_WINS || matchState == MatchState.SECOND_PLAYER_WINS){
           currentMatch.setWinner(plalerNumber);
           finishedMatchesPersistenceService.finishMatch(currentMatch);

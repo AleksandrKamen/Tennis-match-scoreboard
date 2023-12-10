@@ -6,4 +6,13 @@ public enum SetValues implements Values<SetValues>{
     public SetValues getNextValues() {
         return SetValues.values()[this.ordinal()+1];
     }
+
+    public String getValues(){
+        return switch (this){
+            case ZERO -> "0";
+            case ONE -> "1";
+            case TWO -> "2";
+            case THREE -> "3";
+        };
+    }
 }

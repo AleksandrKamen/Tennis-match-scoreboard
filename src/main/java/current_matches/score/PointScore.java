@@ -32,4 +32,8 @@ public class PointScore extends Score<PointValues> {
         }
       return MatchState.NOT_OVER;
     }
+
+    public String getCurrentPlayerScore(int playerNumber){
+        return getPlayerScore().get(playerNumber).getValues();
+    }
 }
