@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManager;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import matches.dto.CreateMathesDto;
+import matches.dto.ReadMatchesDto;
 import matches.service.MatchesService;
 import org.hibernate.Session;
 import players.dto.CreatePlayersDto;
@@ -13,6 +14,8 @@ import players.service.PlayersService;
 import util.HibernateUtil;
 
 import java.lang.reflect.Proxy;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -24,6 +27,35 @@ public class FinishedMatchesPersistenceService { // инкапсулирует �
         var createMathesDto = buildCreateMatchesDto(match);
         savePlayersIfDontExist(createMathesDto);
         saveMatch(createMathesDto);
+    }
+
+    public List<ReadMatchesDto> findAllMatches(String filterByPlayerName, int page) {
+        List<ReadMatchesDto> matches = new ArrayList<>();
+        var sessionFactory = HibernateUtil.getSessionFactory();
+        EntityManager entityManager =  (EntityManager) Proxy.newProxyInstance(Session.class.getClassLoader(),new Class[]{Session.class},
+                ((proxy, method, args) -> method.invoke(sessionFactory.getCurrentSession(),args)));
+        var matchesService = MatchesService.openService(entityManager);
+
+        entityManager.getTransaction().begin();
+
+        matches = matchesService.findMatchesByPlayerName(filterByPlayerName, page);
+
+        entityManager.getTransaction().commit();
+        return matches;
+    }
+    public List<ReadMatchesDto> findAllMatches(int page) {
+        List<ReadMatchesDto> matches = new ArrayList<>();
+        var sessionFactory = HibernateUtil.getSessionFactory();
+        EntityManager entityManager =  (EntityManager) Proxy.newProxyInstance(Session.class.getClassLoader(),new Class[]{Session.class},
+                ((proxy, method, args) -> method.invoke(sessionFactory.getCurrentSession(),args)));
+        var matchesService = MatchesService.openService(entityManager);
+
+        entityManager.getTransaction().begin();
+
+       matches = matchesService.findMatchesWithPagination(page);
+
+        entityManager.getTransaction().commit();
+        return matches;
     }
 
     public void savePlayersIfDontExist(CreateMathesDto createMathesDto){
@@ -70,4 +102,6 @@ public class FinishedMatchesPersistenceService { // инкапсулирует �
                 .winner(matches.getWinner().getName())
                 .build();
     }
+
+
 }

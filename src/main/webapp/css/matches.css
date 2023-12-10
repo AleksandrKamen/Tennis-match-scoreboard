@@ -1,0 +1,32 @@
+body{
+    background-image: url("picture/background_matches.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+h1{
+    font-size: 3vw;
+}
+
+table,.search {
+    width: 80%;
+    border-collapse: collapse;
+    margin: auto;
+}
+
+th, td {
+    font-size: 1vw;
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+.page{
+    text-align: center;
+}
+#left,#right{
+    width: 2%;
+    height: auto;
+}
+#txt{
+    width: 5%;
+    height: auto;
+}
