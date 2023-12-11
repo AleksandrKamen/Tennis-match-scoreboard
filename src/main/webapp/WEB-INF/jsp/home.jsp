@@ -2,6 +2,7 @@
 <%@include file="footer/locale_footer.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
+
 <html>
 
 <head>

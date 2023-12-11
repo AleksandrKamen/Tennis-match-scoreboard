@@ -7,8 +7,10 @@ import org.hibernate.cfg.Configuration;
 @UtilityClass
 public class HibernateUtil {
     private SessionFactory sessionFactory;
+    private final static String DRIVER_NAME_KEY = "db.driver";
 
 static {
+    loadDriver();
     DataImporterUtil.importData();
 }
 public SessionFactory getSessionFactory(){
@@ -29,4 +31,11 @@ public SessionFactory getSessionFactory(){
       Configuration configuration = new Configuration();
       return configuration;
   }
+    private static void loadDriver() {
+        try {
+            Class.forName(PropertiesUtil.get(DRIVER_NAME_KEY));
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

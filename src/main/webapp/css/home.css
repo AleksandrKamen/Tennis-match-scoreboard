@@ -2,6 +2,7 @@ body{
     background-image: url("picture/background_home.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    display: flex;
 }
 h1{
   color: white;

@@ -10,6 +10,6 @@ import java.io.IOException;
 public class OutMenuHeader extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/");
+        resp.sendRedirect("/Tennis-match-scoreboard");
     }
 }

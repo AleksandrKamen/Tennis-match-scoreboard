@@ -22,7 +22,7 @@ th, td {
 .page{
     text-align: center;
 }
-#left,#right{
+#left, #left2,#right,#right2{
     width: 2%;
     height: auto;
 }

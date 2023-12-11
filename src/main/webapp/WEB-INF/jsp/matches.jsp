@@ -3,13 +3,15 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@include file="headers/menu_header.jsp"%>
 <%@include file="footer/locale_footer.jsp"%>
+
 <html>
+
 <head>
     <title>Matches</title>
     <link rel="stylesheet" href="css/matches.css">
 </head>
-<body>
 
+<body>
 <div style="text-align: center">
     <h1>Завершенные матчи</h1>
 </div>
@@ -47,7 +49,7 @@
              <img src="/css/picture/left.png" id="left"></a>
      </c:when>
         <c:otherwise>
-            <a href="/matches?page=${requestScope.page==1?1:requestScope.page-1}"><img src="/css/picture/left.png" id="left"></a>
+            <a href="/matches?page=${requestScope.page==1?1:requestScope.page-1}"><img src="/css/picture/left.png" id="left2"></a>
         </c:otherwise>
     </c:choose>
 
@@ -60,10 +62,11 @@
       </c:when>
 
       <c:otherwise>
-        <a href="/matches?page=${requestScope.page < requestScope.lastPage?requestScope.page+1:requestScope.lastPage}"><img src="/css/picture/right.png" id="right"> </a>
+        <a href="/matches?page=${requestScope.page < requestScope.lastPage?requestScope.page+1:requestScope.lastPage}"><img src="/css/picture/right.png" id="right2"> </a>
       </c:otherwise>
   </c:choose>
 </div>
 
 </body>
+
 </html>
