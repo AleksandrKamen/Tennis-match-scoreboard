@@ -47,7 +47,7 @@
              <img src="/css/picture/left.png" id="left"></a>
      </c:when>
         <c:otherwise>
-            <a href="/matches?page=${requestScope.page==1?1:requestScope.page-1}"><img src="/css/picture/left.png" id="left"> </a>
+            <a href="/matches?page=${requestScope.page==1?1:requestScope.page-1}"><img src="/css/picture/left.png" id="left"></a>
         </c:otherwise>
     </c:choose>
 
@@ -55,12 +55,12 @@
 
   <c:choose>
       <c:when test="${not empty requestScope.filter_by_player_name}">
-          <a href="/matches?filter_by_player_name=${requestScope.filter_by_player_name}&page=${requestScope.page+1}">
+          <a href="/matches?filter_by_player_name=${requestScope.filter_by_player_name}&page=${requestScope.page < requestScope.lastPage?requestScope.page+1:requestScope.lastPage}">
               <img src="/css/picture/right.png" id="right"></a>
       </c:when>
 
       <c:otherwise>
-        <a href="/matches?page=${requestScope.page +1}"><img src="/css/picture/right.png" id="right"> </a>
+        <a href="/matches?page=${requestScope.page < requestScope.lastPage?requestScope.page+1:requestScope.lastPage}"><img src="/css/picture/right.png" id="right"> </a>
       </c:otherwise>
   </c:choose>
 </div>

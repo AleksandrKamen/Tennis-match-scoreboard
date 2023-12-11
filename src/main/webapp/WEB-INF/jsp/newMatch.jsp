@@ -4,6 +4,7 @@
 <html>
 <head>
     <title>newMatch</title>
+    <link rel="stylesheet" href="css/newMatch.css">
 </head>
 <body>
 

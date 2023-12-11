@@ -28,8 +28,22 @@ public class FinishedMatchesPersistenceService { // инкапсулирует �
         savePlayersIfDontExist(createMathesDto);
         saveMatch(createMathesDto);
     }
+    public List<ReadMatchesDto> findAllMatches() {
+        List<ReadMatchesDto> matches = new ArrayList<>();
+        var sessionFactory = HibernateUtil.getSessionFactory();
+        EntityManager entityManager =  (EntityManager) Proxy.newProxyInstance(Session.class.getClassLoader(),new Class[]{Session.class},
+                ((proxy, method, args) -> method.invoke(sessionFactory.getCurrentSession(),args)));
+        var matchesService = MatchesService.openService(entityManager);
 
-    public List<ReadMatchesDto> findAllMatches(String filterByPlayerName, int page) {
+        entityManager.getTransaction().begin();
+
+        matches = matchesService.findAllMatches();
+
+        entityManager.getTransaction().commit();
+        return matches;
+    }
+
+    public List<ReadMatchesDto> findAllMatchesByPlayerNameWithPagination(String filterByPlayerName, int page) {
         List<ReadMatchesDto> matches = new ArrayList<>();
         var sessionFactory = HibernateUtil.getSessionFactory();
         EntityManager entityManager =  (EntityManager) Proxy.newProxyInstance(Session.class.getClassLoader(),new Class[]{Session.class},
@@ -43,7 +57,7 @@ public class FinishedMatchesPersistenceService { // инкапсулирует �
         entityManager.getTransaction().commit();
         return matches;
     }
-    public List<ReadMatchesDto> findAllMatches(int page) {
+    public List<ReadMatchesDto> findAllMatchesByPlayerName(String filterByPlayerName) {
         List<ReadMatchesDto> matches = new ArrayList<>();
         var sessionFactory = HibernateUtil.getSessionFactory();
         EntityManager entityManager =  (EntityManager) Proxy.newProxyInstance(Session.class.getClassLoader(),new Class[]{Session.class},
@@ -51,6 +65,20 @@ public class FinishedMatchesPersistenceService { // инкапсулирует �
         var matchesService = MatchesService.openService(entityManager);
 
         entityManager.getTransaction().begin();
+
+        matches = matchesService.findMatchesByPlayerName(filterByPlayerName);
+
+        entityManager.getTransaction().commit();
+        return matches;
+    }
+    public List<ReadMatchesDto> findAllMatchesWithPagination(int page) {
+       List<ReadMatchesDto> matches = new ArrayList<>();
+       var sessionFactory = HibernateUtil.getSessionFactory();
+       EntityManager entityManager =  (EntityManager) Proxy.newProxyInstance(Session.class.getClassLoader(),new Class[]{Session.class},
+                ((proxy, method, args) -> method.invoke(sessionFactory.getCurrentSession(),args)));
+       var matchesService = MatchesService.openService(entityManager);
+
+       entityManager.getTransaction().begin();
 
        matches = matchesService.findMatchesWithPagination(page);
 
@@ -102,6 +130,4 @@ public class FinishedMatchesPersistenceService { // инкапсулирует �
                 .winner(matches.getWinner().getName())
                 .build();
     }
-
-
 }

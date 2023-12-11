@@ -5,9 +5,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import matches.dto.ReadMatchesDto;
 import service.FinishedMatchesPersistenceService;
 import util.JSPUtil;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -17,16 +17,23 @@ public class MatchesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       var parameter = req.getParameter("page");
-       var page = parameter == null||Integer.parseInt(parameter)<1?1:Integer.parseInt(parameter);
-       var filterByPlayerName = req.getParameter("filter_by_player_name");
+        List<ReadMatchesDto> allMatches;
+        Integer lastPage;
+        var parameter = req.getParameter("page");
+        var page = parameter == null||Integer.parseInt(parameter)<1?1:Integer.parseInt(parameter);
+        var filterByPlayerName = req.getParameter("filter_by_player_name");
 
         if (filterByPlayerName == null || filterByPlayerName.isEmpty()){
-            req.setAttribute("matches", finishedMatchesPersistenceService.findAllMatches(page));
+            allMatches = finishedMatchesPersistenceService.findAllMatchesWithPagination(page);
+            lastPage = finishedMatchesPersistenceService.findAllMatches().size();
         } else {
+            allMatches = finishedMatchesPersistenceService.findAllMatchesByPlayerNameWithPagination(filterByPlayerName, page);
             req.setAttribute("filter_by_player_name",filterByPlayerName);
-            req.setAttribute("matches", finishedMatchesPersistenceService.findAllMatches(filterByPlayerName,page));
+            lastPage = finishedMatchesPersistenceService.findAllMatchesByPlayerName(filterByPlayerName).size();
         }
+
+        req.setAttribute("matches", allMatches);
+        req.setAttribute("lastPage", (int) (Math.ceil(lastPage/7.0)));
         req.setAttribute("page", page);
         req.getRequestDispatcher(JSPUtil.getPath("matches")).forward(req, resp);
 
