@@ -3,9 +3,6 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
 }
-h1{
-    font-size: 3vw;
-}
 
 table,.search {
     width: 80%;

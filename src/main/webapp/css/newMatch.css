@@ -3,10 +3,6 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
 }
-h1{
-    color: white;
-    font-size: 3vw;
-}
 #menu {
     text-align: center;
     margin-top: 5vw;
@@ -30,10 +26,6 @@ input[type="text"] {
     margin-bottom: 10px;
 }
 
-.button{
-    width: 5vw;
-    height: 2vw;
-}
 /*.error{*/
 /*    text-align: center;*/
 /*    font-size: 10vw;*/

@@ -27,11 +27,13 @@
         <td>${requestScope.player2}</td>
         <td>${requestScope.playerScore2}</td>
     </tr>
+</table>
 
-    <div class="matches">
-         <a href="matches"><button type="button">Завершенные матчи</button> </a>
+    <div class="endButton">
+        <a href="new-match"> <button type="button">Новый матч</button></a>
+        <span style="margin: 0 30px;"></span>
+        <a href="matches"> <button type="button">Завершенные матчи</button></a>
     </div>
-
 </c:if>
 
 

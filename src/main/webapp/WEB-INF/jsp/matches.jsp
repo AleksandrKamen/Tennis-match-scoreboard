@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<div style="text-align: center">
+<div style="text-align: center; font-size: 3vw">
     <h1>Завершенные матчи</h1>
 </div>
 

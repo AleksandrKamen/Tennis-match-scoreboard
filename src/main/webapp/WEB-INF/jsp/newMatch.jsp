@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="menu">
-    <h1>Создать новый матч</h1>
+    <h1 style="color: white; font-size: 3vw">Создать новый матч</h1>
 <form action="/new-match" method="post" enctype="application/x-www-form-urlencoded">
     <label for="playerName1">Имя первого игрока</label>
     <input type="text" id="playerName1" name="playerName1" maxlength="30" required placeholder="example:Novak Djokovic">
@@ -17,9 +17,8 @@
     <input type="text" id="playerName2" name="playerName2" maxlength="30" required placeholder="example:Rafael Nadal">
 
     <div class="button">
-    <button type="submit">Начать</button>
+    <button type="submit" style="font-weight: bold; width: 10vw; height: 2vw">Начать</button>
     </div>
-
 </form>
 </div>
 
