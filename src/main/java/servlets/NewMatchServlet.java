@@ -1,6 +1,5 @@
 package servlets;
 
-import current_matches.CurrentMatches;
 import exception.ValidationException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,6 +10,8 @@ import service.OngoingMatchesService;
 import util.JSPUtil;
 
 import java.io.IOException;
+
+import static jakarta.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 
 @WebServlet("/new-match")
 public class NewMatchServlet extends HttpServlet { // Страница нового матча
@@ -28,9 +29,12 @@ public class NewMatchServlet extends HttpServlet { // Страница ново�
         try {
             var currentMatches = ongoingMatchesService.creatNewMatch(playerName1, playerName2);
             resp.sendRedirect("/match-score?uuid="+currentMatches.getUuid());
+
         } catch (ValidationException validationException){
             req.setAttribute("errors",validationException.getErrors());
             doGet(req,resp);
+        } catch (Exception e){
+            resp.setStatus(SC_INTERNAL_SERVER_ERROR);
         }
 
     }

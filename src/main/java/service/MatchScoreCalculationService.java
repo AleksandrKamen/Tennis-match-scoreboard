@@ -9,17 +9,15 @@ import java.util.UUID;
 public class MatchScoreCalculationService {
     private static final MatchScoreCalculationService INSTANCE = new MatchScoreCalculationService();
     private final OngoingMatchesService ongoingMatchesService = OngoingMatchesService.getInstance();
-    private final FinishedMatchesPersistenceService finishedMatchesPersistenceService = FinishedMatchesPersistenceService.getInstance();
 
-  public void updateScore(UUID uuid, int plalerNumber){
+  public MatchState updateScore(UUID uuid, int plalerNumber){
       var currentMatch = ongoingMatchesService.getMatch(uuid).get();
       var matchState = currentMatch.getScore().pointWon(plalerNumber);
 
-      if (matchState == MatchState.FIRST_PLAYER_WINS || matchState == MatchState.SECOND_PLAYER_WINS){
+      if (matchState != MatchState.NOT_OVER){
           currentMatch.setWinner(plalerNumber);
-          finishedMatchesPersistenceService.finishMatch(currentMatch);
-          ongoingMatchesService.removeMatch(currentMatch.getUuid());
       }
+      return matchState;
   }
     public static MatchScoreCalculationService getInstance() {
         return INSTANCE;

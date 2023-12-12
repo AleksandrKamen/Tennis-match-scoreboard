@@ -1,6 +1,7 @@
 package current_matches;
 
 import current_matches.score.MatchScore;
+import lombok.Getter;
 import players.dto.CreatePlayersDto;
 import lombok.Data;
 import java.util.UUID;
@@ -8,9 +9,12 @@ import java.util.UUID;
 public class CurrentMatches {
 
     private final UUID uuid;
+    @Getter
     private final CreatePlayersDto player1;
+    @Getter
     private final CreatePlayersDto player2;
     private CreatePlayersDto winner;
+    @Getter
     private MatchScore score;
     public CurrentMatches(UUID uuid, CreatePlayersDto player1, CreatePlayersDto player2) {
         this.uuid = uuid;
