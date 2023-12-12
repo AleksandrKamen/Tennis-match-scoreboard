@@ -1,6 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<form action="${pageContext.request.contextPath}/en" method="post">
-    <button type="submit" style="position: absolute; bottom: 0; right: 0; cursor: pointer;">en/ru</button>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<head>
+    <link rel="stylesheet" href="css/footer.css">
+</head>
+<div id="locale">
+<form action="/locale" method="post">
+    <div class="buttonsFooter">
+    <button type="submit"  name="lang" value="en_US">EN</button>
+    <button type="submit"  name="lang" value="ru_RU">RU</button>
+    </div>
 </form>
-
+    <fmt:setLocale value="${sessionScope.lang!=null?sessionScope.lang:'en_US'}"/>
+    <fmt:setBundle basename="translations"/>
+</div>
 

@@ -7,10 +7,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-@WebServlet("/en")
+@WebServlet("/locale")
 public class LocaleServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/");
+        var lang = req.getParameter("lang");
+        req.getSession().setAttribute("lang",lang);
+        var prevPage = req.getHeader("referer");
+        var page = prevPage != null?prevPage:"Tennis-match-scoreboard";
+        resp.sendRedirect(page);
     }
 }
