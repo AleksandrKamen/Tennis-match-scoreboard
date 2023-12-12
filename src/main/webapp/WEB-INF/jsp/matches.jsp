@@ -5,7 +5,6 @@
 <%@include file="footer/locale_footer.jsp"%>
 
 <html>
-
 <head>
     <title>Matches</title>
     <link rel="stylesheet" href="css/matches.css">

@@ -14,7 +14,7 @@ import java.io.IOException;
 import static jakarta.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 
 @WebServlet("/new-match")
-public class NewMatchServlet extends HttpServlet { // Страница нового матча
+public class NewMatchServlet extends HttpServlet {
     private static final OngoingMatchesService ongoingMatchesService = OngoingMatchesService.getInstance();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

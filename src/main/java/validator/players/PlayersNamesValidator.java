@@ -13,6 +13,9 @@ public class PlayersNamesValidator implements Validator<List<String>> {
         if (!names.get(0).matches("^[a-zA-Z\s]*") || !names.get(1).matches("^[a-zA-Z\s]*")){
             validationResult.add(Error.of(400,"Введено некорректное имя игрока(присутствуют недопустимые символы)"));
         }
+        if (names.get(0).equals(names.get(1))){
+            validationResult.add(Error.of(400,"Введено одинаковое значение имен"));
+        }
         return validationResult;
     }
 }

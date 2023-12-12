@@ -64,7 +64,7 @@ public class MatchesService {
     public List<ReadMatchesDto> findMatchesByPlayerName(String playerName) {
         var mabyPlayer = playersRepository.findByName(playerName);
         if (mabyPlayer.isPresent()) {
-            return mathesRepository.findByPlayerId(mabyPlayer.get().getId()).stream()
+            return mathesRepository.findByPlayerIdWithPagination(mabyPlayer.get().getId()).stream()
                     .map(readMatchesMapper::mapFrom)
                     .toList();
         }
@@ -76,7 +76,7 @@ public class MatchesService {
         int limit = 7;
         var mabyPlayer = playersRepository.findByName(playerName);
         if (mabyPlayer.isPresent()) {
-            return mathesRepository.findByPlayerId(mabyPlayer.get().getId(), offset, limit).stream()
+            return mathesRepository.findByPlayerIdWithPagination(mabyPlayer.get().getId(), offset, limit).stream()
                     .map(readMatchesMapper::mapFrom)
                     .toList();
         }

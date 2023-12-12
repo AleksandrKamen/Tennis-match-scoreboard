@@ -15,7 +15,7 @@ public class CreatePlayerDtoValidator implements Validator<CreatePlayersDto> {
     public ValidationResult isValid(CreatePlayersDto object) {
         var validationResult = new ValidationResult();
         if (new PlayersRepository(entityManager).findByName(object.getName()).isPresent()){
-            validationResult.add(Error.of(400,"Игрок уже есть в бд"));
+            validationResult.add(Error.of(400,"Игрок уже есть в базе данных"));
         }
         return validationResult;
     }
