@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@include file="headers/menu_header.jsp"%>
 <%@include file="footer/locale_footer.jsp"%>
 
@@ -12,24 +13,24 @@
 
 <body>
 <div style="text-align: center; font-size: 3vw">
-    <h1>Завершенные матчи</h1>
+    <h1><fmt:message key="home.matches"></fmt:message></h1>
 </div>
 
 <div class="search">
 <form action="/matches" method="get" enctype="text/plain">
-    <label for="search"> Поиск матча по игроку:
-        <input type="text" name="filter_by_player_name" id="search" maxlength="30" required placeholder="example:Novak Djokovic">
+    <label for="search"> <fmt:message key="matches.search"></fmt:message>
+        <input type="text" name="filter_by_player_name" id="search" maxlength="30" required placeholder="<fmt:message key="matches.example"></fmt:message>Novak Djokovic">
     </label>
-    <button type="submit" style="cursor: pointer">Поиск</button>
-   <a href="/matches"><button type="button" style="cursor: pointer">Сбросить</button></a>
+    <button type="submit" style="cursor: pointer"><fmt:message key="matches.searchButton"></fmt:message></button>
+   <a href="/matches"><button type="button" style="cursor: pointer"><fmt:message key="matches.clear"></fmt:message></button></a>
 </form>
 </div>
 
 <table id="matches">
     <tr>
-        <th>Матч №</th>
-        <th>Игрок №1</th>
-        <th>Игрок №2</th>
+        <th><fmt:message key="matches.match"></fmt:message></th>
+        <th><fmt:message key="matches.player1"></fmt:message></th>
+        <th><fmt:message key="matches.player2"></fmt:message></th>
     </tr>
 <c:forEach var="matches" items="${requestScope.matches}">
     <tr>
