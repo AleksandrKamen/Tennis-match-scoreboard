@@ -9,7 +9,7 @@ public class TieBreakScore extends Score<Integer>{
     @Override
     public MatchState pointWon(int playerNumber) {
         setPlayerScore(playerNumber,getPlayerScore(playerNumber)+1);
-        var playerScore = getPlayerScore(playerNumber); // Получаем счет нашего игрока
+        var playerScore = getPlayerScore(playerNumber);
         if (playerScore == 7){
             var opposition = getOppositeScore(playerNumber);
             if (opposition <= 5){

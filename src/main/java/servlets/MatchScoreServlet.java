@@ -22,11 +22,12 @@ public class MatchScoreServlet extends HttpServlet {
     FinishedMatchesPersistenceService finishedMatchesPersistenceService = FinishedMatchesPersistenceService.getInstance();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // TODO: 12.12.2023 Валидация на то что матч есть
         var uuid = req.getParameter("uuid");
-        this.uuid = UUID.fromString(uuid);
-        var match = ongoingMatchesService.getMatch(this.uuid).get();
-        req.setAttribute("match",match);
+        if (uuid != null) {
+            this.uuid = UUID.fromString(uuid);
+            var match = ongoingMatchesService.getMatch(this.uuid).get();
+            req.setAttribute("match", match);
+        }
         req.getRequestDispatcher(JSPUtil.getPath("match-score")).forward(req, resp);
     }
 

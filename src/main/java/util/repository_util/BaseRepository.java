@@ -29,7 +29,6 @@ public class BaseRepository<K extends Serializable,E > implements Repository<K,E
         criteriaQuery.from(clazz);
         return entityManager.createQuery(criteriaQuery).getResultList();
     }
-
     @Override
     public E update(E entity) {
        return entityManager.merge(entity);

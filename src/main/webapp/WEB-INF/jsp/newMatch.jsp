@@ -28,6 +28,7 @@
     <div style="color: red">
         <c:forEach var="error" items="${requestScope.errors}">
             <samp>${error.message}</samp>
+            <br>
         </c:forEach>
     </div>
 </c:if>

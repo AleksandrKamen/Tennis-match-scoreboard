@@ -1,6 +1,6 @@
 package current_matches.score.values;
 
-public enum PointValues implements Values<PointValues> {
+public enum PointValues implements Values<PointValues,String> {
     ZERO, FIFTEEN, THIRTY, FORTY, ADVANTAGE;
     @Override
     public PointValues getNextValues() {
@@ -10,7 +10,7 @@ public enum PointValues implements Values<PointValues> {
             return PointValues.values()[this.ordinal() + 1];
         }
     }
-    public String getValues(){
+    public String getValue(){
         return switch (this){
             case ZERO -> "0";
             case FIFTEEN -> "15";

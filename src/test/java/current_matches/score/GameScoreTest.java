@@ -40,7 +40,6 @@ class GameScoreTest {
     }
     @Nested
     class FirstOrSecondPlayerWinsTest{
-        //1 wins 5:<5
         @ParameterizedTest
         @MethodSource("current_matches.score.GameScoreTest#getSetPoint")
         @DisplayName("return state: FIRST_PLAYER_WINS, if score first player = 5 and score second player < 5")

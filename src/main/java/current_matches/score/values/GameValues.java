@@ -1,6 +1,6 @@
 package current_matches.score.values;
 
-public enum GameValues implements Values<GameValues> {
+public enum GameValues implements Values<GameValues,String> {
     ZERO,ONE,TWO, THREE, FOUR, FIVE, SIX,SEVEN;
 
     @Override

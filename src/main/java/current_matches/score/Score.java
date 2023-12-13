@@ -5,9 +5,9 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Score<T> { //абстарктный класс для всех счетов (гейм,сет,матч)
+public abstract class Score<T> {
     @Getter
-    private final List<T> playerScore = new ArrayList<>(); // пара значений
+    private final List<T> playerScore = new ArrayList<>();
 
     protected abstract T getZeroScore();
 
@@ -26,7 +26,6 @@ public abstract class Score<T> { //абстарктный класс для вс
 
     public void setPlayerScore(int playerNumber, T score){
         playerScore.set(playerNumber,score);
-
     }
     public void setOppositeScore(int playerNumber, T score){
         playerScore.set(playerNumber == 0?1:0,score);

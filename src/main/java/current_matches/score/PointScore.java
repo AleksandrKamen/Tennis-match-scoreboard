@@ -9,7 +9,7 @@ public class PointScore extends Score<PointValues> {
     }
     @Override
     public MatchState pointWon(int playerNumber) {
-        var playerScore = getPlayerScore(playerNumber); // Получаем счет нашего игрока
+        var playerScore = getPlayerScore(playerNumber);
 
         if (playerScore.ordinal() <= PointValues.THIRTY.ordinal()) {
             setPlayerScore(playerNumber, playerScore.getNextValues());
@@ -34,6 +34,6 @@ public class PointScore extends Score<PointValues> {
     }
 
     public String getCurrentPlayerScore(int playerNumber){
-        return getPlayerScore().get(playerNumber).getValues();
+        return getPlayerScore().get(playerNumber).getValue();
     }
 }

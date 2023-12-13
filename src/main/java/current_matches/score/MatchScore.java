@@ -4,11 +4,9 @@ import current_matches.score.values.MatchValues;
 
 import java.util.List;
 
-public class MatchScore extends Score<MatchValues> { // Класс описывающий счет матча
+public class MatchScore extends Score<MatchValues> {
     private Integer setCount = 0;
-    private List<String> firstSetResult = List.of("0","0");
-    private List<String> secondSetResult = List.of("0","0");
-    private List<String> thirdSetResult = List.of("0","0");
+    private List<String> firstSetResult = List.of("0","0"), secondSetResult = List.of("0","0"), thirdSetResult = List.of("0","0");
     private SetScore setScore = new SetScore();
     @Override
     protected MatchValues getZeroScore() {
@@ -36,7 +34,6 @@ public class MatchScore extends Score<MatchValues> { // Класс описыв�
         } else {
             thirdSetResult = setScore.getSetResult();
         }
-
         setScore = new SetScore();
         setPlayerScore(playerNumber,getPlayerScore(playerNumber).getNextValues());
         var playerScore = getPlayerScore(playerNumber);

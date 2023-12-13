@@ -31,8 +31,8 @@ public class GameScore extends Score<GameValues> {
         return MatchState.NOT_OVER;
     }
     public MatchState gameWon(int playerNumber){
-        this.pointScore = new PointScore(); // очищаем point
-        setPlayerScore(playerNumber,getPlayerScore(playerNumber).getNextValues()); // обновляем счет по геймам
+        this.pointScore = new PointScore();
+        setPlayerScore(playerNumber,getPlayerScore(playerNumber).getNextValues());
         var playerScore = getPlayerScore(playerNumber).ordinal();
 
         if (playerScore == GameValues.SIX.ordinal()){

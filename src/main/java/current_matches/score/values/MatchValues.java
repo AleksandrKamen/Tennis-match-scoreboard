@@ -1,5 +1,5 @@
 package current_matches.score.values;
-public enum MatchValues implements Values<MatchValues> {
+public enum MatchValues implements Values<MatchValues,String> {
     ZERO,ONE,TWO;
     @Override
     public MatchValues getNextValues(){

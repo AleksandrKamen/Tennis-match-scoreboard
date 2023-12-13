@@ -15,16 +15,16 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class OngoingMatchesService { // Сервис хранит текущие матчи и позволяет их записывать/читать
+public class OngoingMatchesService {
     private static final OngoingMatchesService INSTANCE = new OngoingMatchesService();
     private static final PlayersNamesValidator playerNameValidator = new PlayersNamesValidator();
-    private static ConcurrentHashMap<UUID, CurrentMatches> ongoingMatches = new ConcurrentHashMap<>(); // потокобезопасно
+    private static ConcurrentHashMap<UUID, CurrentMatches> ongoingMatches = new ConcurrentHashMap<>();
     public static OngoingMatchesService getInstance() {
         return INSTANCE;
     }
     public CurrentMatches creatNewMatch(String player1Name, String player2Name) {
 
-        ValidationResult validationResult = playerNameValidator.isValid(List.of(player1Name,player2Name));
+        var validationResult = playerNameValidator.isValid(List.of(player1Name,player2Name));
         if (!validationResult.isValid()){
             throw new ValidationException(validationResult.getErrors());
         }
@@ -50,7 +50,7 @@ public class OngoingMatchesService { // Сервис хранит текущие
     public String standardizePlayerName(String name){
         return Arrays.stream(name.toLowerCase().trim()
                         .split(" "))
-                .map(s -> Character.toUpperCase(s.charAt(0)) + s.substring(1))
-                .collect(Collectors.joining(" "));
+                        .map(s -> Character.toUpperCase(s.charAt(0)) + s.substring(1))
+                        .collect(Collectors.joining(" "));
     }
 }
