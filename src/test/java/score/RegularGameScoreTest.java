@@ -1,5 +1,7 @@
-package current_matches.score;
+package score;
 
+import current_matches.score.MatchState;
+import current_matches.score.PointScore;
 import current_matches.score.values.PointValues;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

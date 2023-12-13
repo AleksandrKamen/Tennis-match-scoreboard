@@ -1,5 +1,6 @@
-package current_matches.score.values;
+package score.values;
 
+import current_matches.score.values.PointValues;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

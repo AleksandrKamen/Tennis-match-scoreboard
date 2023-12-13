@@ -1,5 +1,8 @@
-package current_matches.score;
+package score;
 
+import current_matches.score.GameScore;
+import current_matches.score.MatchState;
+import current_matches.score.TieBreakScore;
 import current_matches.score.values.GameValues;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,7 +25,7 @@ class GameScoreTest {
     @Nested
     class isGameNotOverTest{
         @ParameterizedTest
-        @MethodSource("current_matches.score.GameScoreTest#getSetPoint")
+        @MethodSource("score.GameScoreTest#getSetPoint")
         @DisplayName("return state - game is not over, if score first player < 5 and score second player < 5")
         void gameIsNotOver(String setPoint) {
             gameScore.setPlayerScore(0, GameValues.valueOf(setPoint));
@@ -41,7 +44,7 @@ class GameScoreTest {
     @Nested
     class FirstOrSecondPlayerWinsTest{
         @ParameterizedTest
-        @MethodSource("current_matches.score.GameScoreTest#getSetPoint")
+        @MethodSource("score.GameScoreTest#getSetPoint")
         @DisplayName("return state: FIRST_PLAYER_WINS, if score first player = 5 and score second player < 5")
         void firstPlayerWins(String setPoint) {
             gameScore.setPlayerScore(0, GameValues.FIVE);
@@ -50,7 +53,7 @@ class GameScoreTest {
         }
 
         @ParameterizedTest
-        @MethodSource("current_matches.score.GameScoreTest#getSetPoint")
+        @MethodSource("score.GameScoreTest#getSetPoint")
         @DisplayName("return state: SECOND_PLAYER_WINS, if score first player < 5 and score second player = 5")
         void secondPlayerWins(String setPoint) {
             gameScore.setPlayerScore(1, GameValues.FIVE);
