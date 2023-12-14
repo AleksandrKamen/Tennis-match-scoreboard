@@ -1,6 +1,5 @@
 package servlets;
 
-import current_matches.CurrentMatches;
 import current_matches.score.MatchState;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -40,15 +39,15 @@ public class MatchScoreServlet extends HttpServlet {
             resp.sendRedirect("/match-score?uuid=" + uuid);
         } else {
             var currentMatches = ongoingMatchesService.getMatch(uuid).get();
-            req.setAttribute("winner",currentMatches.getWinner().getName());
-            req.setAttribute("player1",currentMatches.getPlayer1().getName());
-            req.setAttribute("player2",currentMatches.getPlayer2().getName());
-            req.setAttribute("playerScore1",currentMatches.getScore().getPlayerScore(0).getValue());
-            req.setAttribute("playerScore2",currentMatches.getScore().getPlayerScore(1).getValue());
+            req.getSession().setAttribute("winner",currentMatches.getWinner().getName());
+            req.getSession().setAttribute("player1",currentMatches.getPlayer1().getName());
+            req.getSession().setAttribute("player2",currentMatches.getPlayer2().getName());
+            req.getSession().setAttribute("playerScore1",currentMatches.getScore().getPlayerScore(0).getValue());
+            req.getSession().setAttribute("playerScore2",currentMatches.getScore().getPlayerScore(1).getValue());
 
             finishedMatchesPersistenceService.finishMatch(currentMatches);
             ongoingMatchesService.removeMatch(uuid);
-            req.getRequestDispatcher(JSPUtil.getPath("match-score")).forward(req, resp);
+            resp.sendRedirect("matchEnd");
         }
 
 
