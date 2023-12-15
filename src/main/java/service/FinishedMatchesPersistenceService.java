@@ -17,9 +17,8 @@ import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class FinishedMatchesPersistenceService { // инкапсулирует чтение и запись законченных матчей в БД
+public class FinishedMatchesPersistenceService {
   private static final FinishedMatchesPersistenceService INSTANCE = new FinishedMatchesPersistenceService();
    public static FinishedMatchesPersistenceService getInstance(){return INSTANCE;}
 

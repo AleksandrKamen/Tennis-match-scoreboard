@@ -32,20 +32,7 @@ public class MatchesService {
         return createMathesDto;
     }
 
-    public void createMatches(List<String> playersNames) {
-        for (int i = 0; i < playersNames.size() - 1; i += 2) {
-            boolean rnd = Math.random() > 0.5;
-            var createMathesDto = CreateMathesDto.builder()
-                    .player1(playersNames.get(i))
-                    .player2(playersNames.get(i + 1))
-                    .winner(rnd ? playersNames.get(i) : playersNames.get(i + 1))
-                    .build();
-            var matchesEntity = createMathesMapper.mapFrom(createMathesDto);
-            mathesRepository.save(matchesEntity);
-        }
-    }
-
-    public List<ReadMatchesDto> findAllMatches() {
+     public List<ReadMatchesDto> findAllMatches() {
         return mathesRepository.findAll()
                 .stream()
                 .map(readMatchesMapper::mapFrom)
@@ -63,7 +50,8 @@ public class MatchesService {
     public List<ReadMatchesDto> findMatchesByPlayerName(String playerName) {
         var mabyPlayer = playersRepository.findByName(playerName);
         if (mabyPlayer.isPresent()) {
-            return mathesRepository.findByPlayerIdWithPagination(mabyPlayer.get().getId()).stream()
+            return mathesRepository.findMatchesByPlayerId(
+                     mabyPlayer.get().getId()).stream()
                     .map(readMatchesMapper::mapFrom)
                     .toList();
         }
@@ -75,7 +63,7 @@ public class MatchesService {
         int limit = 7;
         var mabyPlayer = playersRepository.findByName(playerName);
         if (mabyPlayer.isPresent()) {
-            return mathesRepository.findByPlayerIdWithPagination(mabyPlayer.get().getId(), offset, limit).stream()
+            return mathesRepository.findMatchesByPlayerId(mabyPlayer.get().getId(), offset, limit).stream()
                     .map(readMatchesMapper::mapFrom)
                     .toList();
         }

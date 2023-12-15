@@ -12,7 +12,7 @@ public class MathesRepository extends BaseRepository<Integer, MatchesEntity> {
     public MathesRepository(EntityManager entityManager){
         super(MatchesEntity.class, entityManager);
     }
-    public List<MatchesEntity> findByPlayerIdWithPagination(Integer playerId){
+    public List<MatchesEntity> findMatchesByPlayerId(Integer playerId){
         var entityManager = getEntityManager();
         var playersEntity = entityManager.find(PlayersEntity.class, playerId);
         var cb = entityManager.getCriteriaBuilder();
@@ -23,7 +23,7 @@ public class MathesRepository extends BaseRepository<Integer, MatchesEntity> {
                 cb.equal(matches.get(MatchesEntity_.PLAYER2),playersEntity)));
         return entityManager.createQuery(criteria).getResultList();
     }
-    public List<MatchesEntity> findByPlayerIdWithPagination(Integer playerId, int page, int limit){
+    public List<MatchesEntity> findMatchesByPlayerId(Integer playerId, Integer page, Integer limit){
         var entityManager = getEntityManager();
         var playersEntity = entityManager.find(PlayersEntity.class, playerId);
         var cb = entityManager.getCriteriaBuilder();
@@ -38,7 +38,7 @@ public class MathesRepository extends BaseRepository<Integer, MatchesEntity> {
                 .getResultList();
     }
 
-    public List<MatchesEntity> findMatchesWithPagination(int page, int limit){
+    public List<MatchesEntity> findMatchesWithPagination(Integer page, Integer limit){
         var entityManager = getEntityManager();
         var cb = entityManager.getCriteriaBuilder();
         var criteria = cb.createQuery(MatchesEntity.class);
