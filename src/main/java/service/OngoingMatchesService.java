@@ -31,7 +31,7 @@ public class OngoingMatchesService {
         var standardizePlayerName1 = standardizePlayerName(player1Name);
         var standardizePlayerName2 = standardizePlayerName(player2Name);
 
-        UUID uuid = UUID.randomUUID();
+        var uuid = UUID.randomUUID();
         var player1 = CreatePlayersDto.builder().name(standardizePlayerName1).build();
         var player2 = CreatePlayersDto.builder().name(standardizePlayerName2).build();
         var newMatch = new CurrentMatches(uuid, player1,player2);

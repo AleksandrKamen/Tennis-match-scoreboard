@@ -8,8 +8,7 @@ import java.util.UUID;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MatchScoreCalculationService {
     private static final MatchScoreCalculationService INSTANCE = new MatchScoreCalculationService();
-    private final OngoingMatchesService ongoingMatchesService = OngoingMatchesService.getInstance();
-
+    private static final OngoingMatchesService ongoingMatchesService = OngoingMatchesService.getInstance();
   public MatchState updateScore(UUID uuid, int plalerNumber){
       var currentMatch = ongoingMatchesService.getMatch(uuid).get();
       var matchState = currentMatch.getScore().pointWon(plalerNumber);

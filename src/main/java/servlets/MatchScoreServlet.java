@@ -22,14 +22,15 @@ public class MatchScoreServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         var uuid = req.getParameter("uuid");
-        if (uuid != null) {
+        if (uuid != null && ongoingMatchesService.containsMatch(UUID.fromString(uuid))) {
             this.uuid = UUID.fromString(uuid);
             var match = ongoingMatchesService.getMatch(this.uuid).get();
             req.setAttribute("match", match);
+            req.getRequestDispatcher(JSPUtil.getPath("match-score")).forward(req, resp);
+        } else {
+            resp.sendRedirect("/new-match");
         }
-        req.getRequestDispatcher(JSPUtil.getPath("match-score")).forward(req, resp);
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         var parameter = req.getParameter("player");
