@@ -25,6 +25,7 @@ public class DataImporterUtil {
                 "Constant Lestienne","Taro Daniel", "Benjamin Bonzi","Tomas Machac","Gasquet Richard","Luca Van Assche",
                 "Wawrinka Stanislas","Daniel Altmaier","Marton Fucsovics","Yoshihito Nishioka","Zhizhen Zhang","Roman Safiullin",
                 "Christopher Eubanks");
+
           var firstPlayer = names.get(random.nextInt(names.size()));
           var secondPlayer = names.get(random.nextInt(names.size()));
           while (firstPlayer.equals(secondPlayer)){

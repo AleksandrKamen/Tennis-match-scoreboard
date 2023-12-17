@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.HibernateException;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
