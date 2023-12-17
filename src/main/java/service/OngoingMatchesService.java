@@ -3,13 +3,12 @@ package service;
 import current_matches.CurrentMatches;
 import exception.ValidationException;
 import players.dto.CreatePlayersDto;
+import util.StandartNameUtil;
 import validator.players.PlayersNamesValidator;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
 public class OngoingMatchesService {
     private static final PlayersNamesValidator playerNameValidator = new PlayersNamesValidator();
@@ -21,12 +20,9 @@ public class OngoingMatchesService {
         if (!validationResult.isValid()){
             throw new ValidationException(validationResult.getErrors());
         }
-        var standardizePlayerName1 = standardizePlayerName(player1Name);
-        var standardizePlayerName2 = standardizePlayerName(player2Name);
-
         var uuid = UUID.randomUUID();
-        var player1 = CreatePlayersDto.builder().name(standardizePlayerName1).build();
-        var player2 = CreatePlayersDto.builder().name(standardizePlayerName2).build();
+        var player1 = CreatePlayersDto.builder().name(StandartNameUtil.changeNameForWrite(player1Name)).build();
+        var player2 = CreatePlayersDto.builder().name(StandartNameUtil.changeNameForWrite(player2Name)).build();
         var newMatch = new CurrentMatches(uuid, player1,player2);
         ongoingMatches.put(uuid, newMatch);
         return newMatch;
@@ -39,11 +35,5 @@ public class OngoingMatchesService {
     }
     public boolean containsMatch(UUID uuid) {
         return ongoingMatches.containsKey(uuid);
-    }
-    public String standardizePlayerName(String name){
-        return Arrays.stream(name.toLowerCase().trim()
-                        .split(" "))
-                        .map(s -> Character.toUpperCase(s.charAt(0)) + s.substring(1))
-                        .collect(Collectors.joining(" "));
     }
 }

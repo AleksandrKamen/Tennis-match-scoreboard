@@ -34,7 +34,7 @@
         <td class="player">${match.getPlayer1().getName()}</td>
         <td>
             <div class="buttons">
-                <form action="/match-score" method="post">
+                <form action="/match-score?uuid=${match.getUuid()}" method="post">
                     <button type="submit" name="player" value="0"><fmt:message key="match-score.player1"></fmt:message></button>
                 </form>
         </div></td>
@@ -49,7 +49,7 @@
         <td class="player">${match.getPlayer2().getName()}</td>
         <td>
             <div class="buttons">
-             <form action="/match-score" method="post">
+             <form action="/match-score?uuid=${match.getUuid()}" method="post">
                  <button type="submit" name="player" value="1"><fmt:message key="match-score.player2"></fmt:message></button>
              </form>
             </div>
