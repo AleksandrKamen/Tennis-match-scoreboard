@@ -16,9 +16,9 @@ import java.util.UUID;
 @WebServlet("/match-score")
 public class MatchScoreServlet extends HttpServlet {
     private UUID uuid = null;
-    OngoingMatchesService ongoingMatchesService = OngoingMatchesService.getInstance();
-    MatchScoreCalculationService matchScoreCalculationService = MatchScoreCalculationService.getInstance();
-    FinishedMatchesPersistenceService finishedMatchesPersistenceService = FinishedMatchesPersistenceService.getInstance();
+    OngoingMatchesService ongoingMatchesService = new OngoingMatchesService();
+    MatchScoreCalculationService matchScoreCalculationService = new MatchScoreCalculationService();
+    FinishedMatchesPersistenceService finishedMatchesPersistenceService = new FinishedMatchesPersistenceService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         var uuid = req.getParameter("uuid");

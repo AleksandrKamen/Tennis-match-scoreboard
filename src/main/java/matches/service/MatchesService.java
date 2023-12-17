@@ -2,8 +2,6 @@ package matches.service;
 
 import matches.dto.CreateMathesDto;
 import matches.dto.ReadMatchesDto;
-import jakarta.persistence.EntityManager;
-import lombok.RequiredArgsConstructor;
 import matches.mapper.CreateMathesMapper;
 import matches.mapper.ReadMatchesMapper;
 import matches.repository.MathesRepository;
@@ -11,20 +9,11 @@ import players.repository.PlayersRepository;
 import java.util.Collections;
 import java.util.List;
 
-@RequiredArgsConstructor
 public class MatchesService {
-    private final MathesRepository mathesRepository;
-    private final CreateMathesMapper createMathesMapper;
-    private final ReadMatchesMapper readMatchesMapper;
-    private final PlayersRepository playersRepository;
-
-    public static MatchesService openService(EntityManager entityManager) {
-        var mathesRepository = new MathesRepository(entityManager);
-        var playersRepository = new PlayersRepository(entityManager);
-        var createMathesMapper = new CreateMathesMapper(playersRepository);
-        var readMatchesMapper = new ReadMatchesMapper();
-        return new MatchesService(mathesRepository, createMathesMapper, readMatchesMapper, playersRepository);
-    }
+    private static final MathesRepository mathesRepository = new MathesRepository();
+    private static final CreateMathesMapper createMathesMapper = new CreateMathesMapper();
+    private static final ReadMatchesMapper readMatchesMapper = new ReadMatchesMapper();
+    private static final PlayersRepository playersRepository = new PlayersRepository();
 
     public CreateMathesDto createMatch(CreateMathesDto createMathesDto) {
         var matchesEntity = createMathesMapper.mapFrom(createMathesDto);

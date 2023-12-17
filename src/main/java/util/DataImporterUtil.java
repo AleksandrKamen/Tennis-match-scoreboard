@@ -8,7 +8,7 @@ import java.util.Random;
 
 @UtilityClass
 public class DataImporterUtil {
-    FinishedMatchesPersistenceService finishedMatchesPersistenceService = FinishedMatchesPersistenceService.getInstance();
+    FinishedMatchesPersistenceService finishedMatchesPersistenceService = new FinishedMatchesPersistenceService();
     public void importData (){
         for (int i = 0; i <50; i++) {
             var match = getCreateMatchesDto();

@@ -23,9 +23,9 @@ public class GameScore extends Score<GameValues> {
         }
        var state = pointScore.pointWon(playerNumber);
 
-       if (state == MatchState.FIRST_PLAYER_WINS){
+       if (state == MatchState.FIRST_PLAYER_WON){
            return gameWon(0);
-       } else if(state == MatchState.SECOND_PLAYER_WINS) {
+       } else if(state == MatchState.SECOND_PLAYER_WON) {
             return gameWon(1);
        }
         return MatchState.NOT_OVER;
@@ -41,10 +41,10 @@ public class GameScore extends Score<GameValues> {
                 tieBreakTime = true;
                 tieBreak = new TieBreakScore();
             } else if (opposition <= GameValues.FOUR.ordinal()){
-                return playerNumber == 0 ? MatchState.FIRST_PLAYER_WINS : MatchState.SECOND_PLAYER_WINS;
+                return playerNumber == 0 ? MatchState.FIRST_PLAYER_WON : MatchState.SECOND_PLAYER_WON;
             }
         } else if (playerScore == GameValues.SEVEN.ordinal()){
-            return playerNumber == 0 ? MatchState.FIRST_PLAYER_WINS : MatchState.SECOND_PLAYER_WINS;
+            return playerNumber == 0 ? MatchState.FIRST_PLAYER_WON : MatchState.SECOND_PLAYER_WON;
         }
         return MatchState.NOT_OVER;
     }

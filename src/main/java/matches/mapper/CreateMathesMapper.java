@@ -6,9 +6,8 @@ import lombok.RequiredArgsConstructor;
 import util.mapper_util.Mapper;
 import players.repository.PlayersRepository;
 
-@RequiredArgsConstructor
 public class CreateMathesMapper implements Mapper<CreateMathesDto, MatchesEntity> {
-   private final PlayersRepository playersRepository;
+   private final PlayersRepository playersRepository = new PlayersRepository();
     @Override
     public MatchesEntity mapFrom(CreateMathesDto object) {
 

@@ -22,11 +22,11 @@ public class PointScore extends Score<PointValues> {
             } else if (opposition == PointValues.ADVANTAGE.ordinal()){
                 setOppositeScore(playerNumber, PointValues.FORTY);
             } else {
-                return playerNumber == 0 ? MatchState.FIRST_PLAYER_WINS: MatchState.SECOND_PLAYER_WINS;
+                return playerNumber == 0 ? MatchState.FIRST_PLAYER_WON : MatchState.SECOND_PLAYER_WON;
             }
         }
         else if (playerScore.ordinal() == PointValues.ADVANTAGE.ordinal()){
-            return playerNumber == 0 ? MatchState.FIRST_PLAYER_WINS: MatchState.SECOND_PLAYER_WINS;
+            return playerNumber == 0 ? MatchState.FIRST_PLAYER_WON : MatchState.SECOND_PLAYER_WON;
         } else {
             throw new IllegalArgumentException("Cannot call pointWon() on ADVANTAGE");
         }

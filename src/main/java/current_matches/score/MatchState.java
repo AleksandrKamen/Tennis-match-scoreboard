@@ -1,5 +1,5 @@
 package current_matches.score;
 
 public enum MatchState {
-    FIRST_PLAYER_WINS, SECOND_PLAYER_WINS, NOT_OVER
+    FIRST_PLAYER_WON, SECOND_PLAYER_WON, NOT_OVER
 }

@@ -1,12 +1,9 @@
 package service;
 
+import current_matches.CurrentMatches;
 import exception.ValidationException;
 import players.dto.CreatePlayersDto;
-import current_matches.CurrentMatches;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import validator.players.PlayersNamesValidator;
-import validator.ValidationResult;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -14,14 +11,10 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class OngoingMatchesService {
-    private static final OngoingMatchesService INSTANCE = new OngoingMatchesService();
     private static final PlayersNamesValidator playerNameValidator = new PlayersNamesValidator();
     private static ConcurrentHashMap<UUID, CurrentMatches> ongoingMatches = new ConcurrentHashMap<>();
-    public static OngoingMatchesService getInstance() {
-        return INSTANCE;
-    }
+
     public CurrentMatches creatNewMatch(String player1Name, String player2Name) {
 
         var validationResult = playerNameValidator.isValid(List.of(player1Name,player2Name));

@@ -37,8 +37,8 @@ dependencies {
     annotationProcessor "org.hibernate.orm:hibernate-jpamodelgen:${hibernateVersion}"
 
 
-    testCompileOnly 'org.projectlombok:lombok:1.18.30'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+    testCompileOnly "org.projectlombok:${lombokVersion}"
+    testAnnotationProcessor "org.projectlombok:${lombokVersion}"
     testImplementation 'org.assertj:assertj-core:3.24.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.10.0'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")

@@ -1,41 +1,51 @@
 package util.repository_util;
 
-import jakarta.persistence.EntityManager;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.HibernateException;
+import org.hibernate.Transaction;
+import util.HibernateUtil;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 @RequiredArgsConstructor
-public class BaseRepository<K extends Serializable,E > implements Repository<K,E>{
+public abstract class BaseRepository<K extends Serializable,E > implements Repository<K,E>{
 
     private final Class<E> clazz;
-    @Getter
-    private final EntityManager entityManager;
+
     @Override
     public E save(E entity) {
-        entityManager.persist(entity);
+        Transaction transaction = null;
+        try (var session = HibernateUtil.getSession()){
+            transaction = session.beginTransaction();
+            session.persist(entity);
+            session.getTransaction().commit();
+        } catch (HibernateException hibernateException){
+              if (transaction != null && transaction.isActive()){
+                  transaction.rollback();
+              }
+        }
         return entity;
     }
     @Override
     public Optional<E> find(K id) {
-        return Optional.ofNullable(entityManager.find(clazz, id));
+        try (var session = HibernateUtil.getSession()){
+           var transaction = session.beginTransaction();
+            E mabyObject = session.find(clazz, id);
+            transaction.commit();
+            return Optional.ofNullable(mabyObject);
+        }
     }
 
     @Override
     public List<E> findAll() {
-        var criteriaQuery = entityManager.getCriteriaBuilder().createQuery(clazz);
-        criteriaQuery.from(clazz);
-        return entityManager.createQuery(criteriaQuery).getResultList();
+        try (var session = HibernateUtil.getSession()){
+           var transaction = session.beginTransaction();
+            var criteriaQuery = session.getCriteriaBuilder().createQuery(clazz);
+            criteriaQuery.from(clazz);
+            List<E> resultList = session.createQuery(criteriaQuery).getResultList();
+            transaction.commit();
+            return resultList;
+        }
     }
-    @Override
-    public E update(E entity) {
-       return entityManager.merge(entity);
-    }
-    @Override
-    public void delete(K id) {
-        entityManager.remove(id);
-        entityManager.flush();
-    }
-}
+ }

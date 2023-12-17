@@ -18,9 +18,9 @@ public class SetScore extends Score<SetValues>{
     public MatchState pointWon(int playerNumber) {
         var matchState = gameScore.pointWon(playerNumber);
 
-        if (matchState == MatchState.FIRST_PLAYER_WINS){
+        if (matchState == MatchState.FIRST_PLAYER_WON){
             return setWon(0);
-        } else if(matchState == MatchState.SECOND_PLAYER_WINS) {
+        } else if(matchState == MatchState.SECOND_PLAYER_WON) {
             return setWon(1);
         }
         return MatchState.NOT_OVER;
@@ -33,7 +33,7 @@ public class SetScore extends Score<SetValues>{
 
         setPlayerScore(playerNumber,getPlayerScore(playerNumber).getNextValues());
         gameScore = new GameScore();
-        return playerNumber == 0 ? MatchState.FIRST_PLAYER_WINS : MatchState.SECOND_PLAYER_WINS;
+        return playerNumber == 0 ? MatchState.FIRST_PLAYER_WON : MatchState.SECOND_PLAYER_WON;
     }
 
     public List<String> getCurrentPlayerScore(int playerNumber) {

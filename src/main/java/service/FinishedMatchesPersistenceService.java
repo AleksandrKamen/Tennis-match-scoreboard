@@ -17,10 +17,10 @@ import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+
 public class FinishedMatchesPersistenceService {
-  private static final FinishedMatchesPersistenceService INSTANCE = new FinishedMatchesPersistenceService();
-   public static FinishedMatchesPersistenceService getInstance(){return INSTANCE;}
+    private static final MatchesService matchService = new MatchesService();
+    private static final PlayersService playersService = new PlayersService();
 
     public void finishMatch(CurrentMatches match){
         var createMathesDto = buildCreateMatchesDto(match);
@@ -28,70 +28,20 @@ public class FinishedMatchesPersistenceService {
         saveMatch(createMathesDto);
     }
     public List<ReadMatchesDto> findAllMatches() {
-        List<ReadMatchesDto> matches = new ArrayList<>();
-        var sessionFactory = HibernateUtil.getSessionFactory();
-        EntityManager entityManager =  (EntityManager) Proxy.newProxyInstance(Session.class.getClassLoader(),new Class[]{Session.class},
-                ((proxy, method, args) -> method.invoke(sessionFactory.getCurrentSession(),args)));
-        var matchesService = MatchesService.openService(entityManager);
-
-        entityManager.getTransaction().begin();
-
-        matches = matchesService.findAllMatches();
-
-        entityManager.getTransaction().commit();
-        return matches;
+        return matchService.findAllMatches();
     }
 
     public List<ReadMatchesDto> findAllMatchesByPlayerNameWithPagination(String filterByPlayerName, int page) {
-        List<ReadMatchesDto> matches = new ArrayList<>();
-        var sessionFactory = HibernateUtil.getSessionFactory();
-        EntityManager entityManager =  (EntityManager) Proxy.newProxyInstance(Session.class.getClassLoader(),new Class[]{Session.class},
-                ((proxy, method, args) -> method.invoke(sessionFactory.getCurrentSession(),args)));
-        var matchesService = MatchesService.openService(entityManager);
-
-        entityManager.getTransaction().begin();
-
-        matches = matchesService.findMatchesByPlayerName(filterByPlayerName, page);
-
-        entityManager.getTransaction().commit();
-        return matches;
+      return  matchService.findMatchesByPlayerName(filterByPlayerName, page);
     }
     public List<ReadMatchesDto> findAllMatchesByPlayerName(String filterByPlayerName) {
-        List<ReadMatchesDto> matches = new ArrayList<>();
-        var sessionFactory = HibernateUtil.getSessionFactory();
-        EntityManager entityManager =  (EntityManager) Proxy.newProxyInstance(Session.class.getClassLoader(),new Class[]{Session.class},
-                ((proxy, method, args) -> method.invoke(sessionFactory.getCurrentSession(),args)));
-        var matchesService = MatchesService.openService(entityManager);
-
-        entityManager.getTransaction().begin();
-
-        matches = matchesService.findMatchesByPlayerName(filterByPlayerName);
-
-        entityManager.getTransaction().commit();
-        return matches;
+      return matchService.findMatchesByPlayerName(filterByPlayerName);
     }
     public List<ReadMatchesDto> findAllMatchesWithPagination(int page) {
-       List<ReadMatchesDto> matches = new ArrayList<>();
-       var sessionFactory = HibernateUtil.getSessionFactory();
-       EntityManager entityManager =  (EntityManager) Proxy.newProxyInstance(Session.class.getClassLoader(),new Class[]{Session.class},
-                ((proxy, method, args) -> method.invoke(sessionFactory.getCurrentSession(),args)));
-       var matchesService = MatchesService.openService(entityManager);
-
-       entityManager.getTransaction().begin();
-
-       matches = matchesService.findMatchesWithPagination(page);
-
-        entityManager.getTransaction().commit();
-        return matches;
+       return matchService.findMatchesWithPagination(page);
     }
 
     public void savePlayersIfDontExist(CreateMathesDto createMathesDto){
-
-        var sessionFactory = HibernateUtil.getSessionFactory();
-        EntityManager entityManager =  (EntityManager) Proxy.newProxyInstance(Session.class.getClassLoader(),new Class[]{Session.class},
-                ((proxy, method, args) -> method.invoke(sessionFactory.getCurrentSession(),args)));
-        var playersService = PlayersService.openService(entityManager);
-        entityManager.getTransaction().begin();
 
     try {
         playersService.createPlayer(CreatePlayersDto
@@ -107,20 +57,9 @@ public class FinishedMatchesPersistenceService {
                         .build());
     } catch (ValidationException e){}
 
-        entityManager.getTransaction().commit();
     }
     public void saveMatch(CreateMathesDto createMathesDto){
-
-        var sessionFactory = HibernateUtil.getSessionFactory();
-        EntityManager entityManager =  (EntityManager) Proxy.newProxyInstance(Session.class.getClassLoader(),new Class[]{Session.class},
-                ((proxy, method, args) -> method.invoke(sessionFactory.getCurrentSession(),args)));
-        var matchesService = MatchesService.openService(entityManager);
-
-        entityManager.getTransaction().begin();
-
-        matchesService.createMatch(createMathesDto);
-
-        entityManager.getTransaction().commit();
+        matchService.createMatch(createMathesDto);
     }
     private CreateMathesDto buildCreateMatchesDto(CurrentMatches matches){
         return CreateMathesDto.builder()

@@ -45,20 +45,20 @@ class GameScoreTest {
     class FirstOrSecondPlayerWinsTest{
         @ParameterizedTest
         @MethodSource("score.GameScoreTest#getSetPoint")
-        @DisplayName("return state: FIRST_PLAYER_WINS, if score first player = 5 and score second player < 5")
+        @DisplayName("return state: FIRST_PLAYER_WON, if score first player = 5 and score second player < 5")
         void firstPlayerWins(String setPoint) {
             gameScore.setPlayerScore(0, GameValues.FIVE);
             gameScore.setPlayerScore(1, GameValues.valueOf(setPoint));
-            assertEquals(gameScore.gameWon(0), MatchState.FIRST_PLAYER_WINS);
+            assertEquals(gameScore.gameWon(0), MatchState.FIRST_PLAYER_WON);
         }
 
         @ParameterizedTest
         @MethodSource("score.GameScoreTest#getSetPoint")
-        @DisplayName("return state: SECOND_PLAYER_WINS, if score first player < 5 and score second player = 5")
+        @DisplayName("return state: SECOND_PLAYER_WON, if score first player < 5 and score second player = 5")
         void secondPlayerWins(String setPoint) {
             gameScore.setPlayerScore(1, GameValues.FIVE);
             gameScore.setPlayerScore(0, GameValues.valueOf(setPoint));
-            assertEquals(gameScore.gameWon(1), MatchState.SECOND_PLAYER_WINS);
+            assertEquals(gameScore.gameWon(1), MatchState.SECOND_PLAYER_WON);
         }
     }
         @Nested
@@ -72,7 +72,7 @@ class GameScoreTest {
             for (int i = 0; i <6; i++) {
                 assertEquals(gameScore.pointWon(0), MatchState.NOT_OVER);
             }
-            assertEquals(gameScore.pointWon(0), MatchState.FIRST_PLAYER_WINS);
+            assertEquals(gameScore.pointWon(0), MatchState.FIRST_PLAYER_WON);
 
         }
         @ParameterizedTest
@@ -97,29 +97,29 @@ class GameScoreTest {
         }
         @ParameterizedTest
         @ValueSource(ints = {0,1,2,3,4,5})
-        @DisplayName("return state - player first or second wins, if score 7:x<=5 or x<=5:7")
+        @DisplayName("return state - player first or second won, if score 7:x<=5 or x<=5:7")
         void firstOrSecondPlayerWins(int tieBreakPoint){
             var tieBreak = new TieBreakScore();
             tieBreak.setPlayerScore(0,6);
             tieBreak.setPlayerScore(1,tieBreakPoint);
-            assertEquals(tieBreak.pointWon(0), MatchState.FIRST_PLAYER_WINS);
+            assertEquals(tieBreak.pointWon(0), MatchState.FIRST_PLAYER_WON);
 
             tieBreak.setPlayerScore(0,tieBreakPoint);
             tieBreak.setPlayerScore(1,6);
-            assertEquals(tieBreak.pointWon(1), MatchState.SECOND_PLAYER_WINS);
+            assertEquals(tieBreak.pointWon(1), MatchState.SECOND_PLAYER_WON);
         }
         @ParameterizedTest
         @ValueSource(ints = {7,8,9,10,11,12,13,14,15})
-        @DisplayName("return state - player first or second wins, if difference between players = 2")
+        @DisplayName("return state - player first or second won, if difference between players = 2")
         void firstOrSecondPlayerWinsIfScoreMoreTwo(int tieBreakPoint){
             var tieBreak = new TieBreakScore();
             tieBreak.setPlayerScore(0,tieBreakPoint+1);
             tieBreak.setPlayerScore(1,tieBreakPoint);
-            assertEquals(tieBreak.pointWon(0), MatchState.FIRST_PLAYER_WINS);
+            assertEquals(tieBreak.pointWon(0), MatchState.FIRST_PLAYER_WON);
 
             tieBreak.setPlayerScore(0,tieBreakPoint);
             tieBreak.setPlayerScore(1,tieBreakPoint+1);
-            assertEquals(tieBreak.pointWon(1), MatchState.SECOND_PLAYER_WINS);
+            assertEquals(tieBreak.pointWon(1), MatchState.SECOND_PLAYER_WON);
         }
     }
 

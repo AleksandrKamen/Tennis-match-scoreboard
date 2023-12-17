@@ -39,19 +39,19 @@ class RegularGameScoreTest {
     void firstPlayerWins(String values) {
         pointScore.setPlayerScore(0, PointValues.FORTY);
         pointScore.setPlayerScore(1, PointValues.valueOf(values));
-        assertEquals(pointScore.pointWon(0), MatchState.FIRST_PLAYER_WINS);
+        assertEquals(pointScore.pointWon(0), MatchState.FIRST_PLAYER_WON);
 
         pointScore.setPlayerScore(0, PointValues.valueOf(values));
         pointScore.setPlayerScore(1, PointValues.FORTY);
-        assertEquals(pointScore.pointWon(1), MatchState.SECOND_PLAYER_WINS);
+        assertEquals(pointScore.pointWon(1), MatchState.SECOND_PLAYER_WON);
 
         pointScore.setPlayerScore(0, PointValues.ADVANTAGE);
         pointScore.setPlayerScore(1, PointValues.FORTY);
-        assertEquals(pointScore.pointWon(0), MatchState.FIRST_PLAYER_WINS);
+        assertEquals(pointScore.pointWon(0), MatchState.FIRST_PLAYER_WON);
 
         pointScore.setPlayerScore(0, PointValues.FORTY);
         pointScore.setPlayerScore(1, PointValues.ADVANTAGE);
-        assertEquals(pointScore.pointWon(1), MatchState.SECOND_PLAYER_WINS);
+        assertEquals(pointScore.pointWon(1), MatchState.SECOND_PLAYER_WON);
     }
     @Test
     @DisplayName("throw exception if invalid point name")

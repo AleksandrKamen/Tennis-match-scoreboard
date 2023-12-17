@@ -13,11 +13,11 @@ public class TieBreakScore extends Score<Integer>{
         if (playerScore == 7){
             var opposition = getOppositeScore(playerNumber);
             if (opposition <= 5){
-                return playerNumber == 0 ? MatchState.FIRST_PLAYER_WINS : MatchState.SECOND_PLAYER_WINS;
+                return playerNumber == 0 ? MatchState.FIRST_PLAYER_WON : MatchState.SECOND_PLAYER_WON;
             }
         }
         else if (playerScore > 7 && playerScore - getOppositeScore(playerNumber) == 2){
-            return playerNumber == 0 ? MatchState.FIRST_PLAYER_WINS : MatchState.SECOND_PLAYER_WINS;
+            return playerNumber == 0 ? MatchState.FIRST_PLAYER_WON : MatchState.SECOND_PLAYER_WON;
         }
         return MatchState.NOT_OVER;
     }

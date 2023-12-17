@@ -1,14 +1,9 @@
 package service;
 
 import current_matches.score.MatchState;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-
 import java.util.UUID;
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MatchScoreCalculationService {
-    private static final MatchScoreCalculationService INSTANCE = new MatchScoreCalculationService();
-    private static final OngoingMatchesService ongoingMatchesService = OngoingMatchesService.getInstance();
+  private static final OngoingMatchesService ongoingMatchesService = new OngoingMatchesService();
   public MatchState updateScore(UUID uuid, int plalerNumber){
       var currentMatch = ongoingMatchesService.getMatch(uuid).get();
       var matchState = currentMatch.getScore().pointWon(plalerNumber);
@@ -18,7 +13,5 @@ public class MatchScoreCalculationService {
       }
       return matchState;
   }
-    public static MatchScoreCalculationService getInstance() {
-        return INSTANCE;
-    }
+
 }
