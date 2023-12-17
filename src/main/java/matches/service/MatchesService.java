@@ -2,6 +2,7 @@ package matches.service;
 
 import matches.dto.CreateMathesDto;
 import matches.dto.ReadMatchesDto;
+import matches.entity.MatchesEntity;
 import matches.mapper.CreateMathesMapper;
 import matches.mapper.ReadMatchesMapper;
 import matches.repository.MathesRepository;
@@ -13,9 +14,8 @@ public class MatchesService {
     private static final MathesRepository mathesRepository = new MathesRepository();
     private static final CreateMathesMapper createMathesMapper = new CreateMathesMapper();
     private static final ReadMatchesMapper readMatchesMapper = new ReadMatchesMapper();
-    private static final PlayersRepository playersRepository = new PlayersRepository();
 
-    public CreateMathesDto createMatch(CreateMathesDto createMathesDto) {
+     public CreateMathesDto createMatch(CreateMathesDto createMathesDto) {
         var matchesEntity = createMathesMapper.mapFrom(createMathesDto);
         mathesRepository.save(matchesEntity);
         return createMathesDto;
@@ -37,10 +37,9 @@ public class MatchesService {
     }
 
     public List<ReadMatchesDto> findMatchesByPlayerName(String playerName) {
-        var mabyPlayer = playersRepository.findByName(playerName);
-        if (mabyPlayer.isPresent()) {
-            return mathesRepository.findMatchesByPlayerId(
-                     mabyPlayer.get().getId()).stream()
+        var matchesByPlayerName = mathesRepository.findMatchesByPlayerName(playerName);
+        if (!matchesByPlayerName.isEmpty()) {
+            return matchesByPlayerName.stream()
                     .map(readMatchesMapper::mapFrom)
                     .toList();
         }
@@ -50,9 +49,9 @@ public class MatchesService {
     public List<ReadMatchesDto> findMatchesByPlayerName(String playerName, int page) {
         int offset = page * 7 - 7;
         int limit = 7;
-        var mabyPlayer = playersRepository.findByName(playerName);
-        if (mabyPlayer.isPresent()) {
-            return mathesRepository.findMatchesByPlayerId(mabyPlayer.get().getId(), offset, limit).stream()
+        var matchesByPlayerNameWithPagination = mathesRepository.findMatchesByPlayerNameWithPagination(playerName, offset, limit);
+        if (!matchesByPlayerNameWithPagination.isEmpty()) {
+            return mathesRepository.findMatchesByPlayerNameWithPagination(playerName, offset, limit).stream()
                     .map(readMatchesMapper::mapFrom)
                     .toList();
         }
