@@ -1,5 +1,6 @@
 package servlets;
 
+import current_matches.CurrentMatches;
 import current_matches.score.MatchState;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,23 +12,28 @@ import service.MatchScoreCalculationService;
 import service.OngoingMatchesService;
 import util.JSPUtil;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.UUID;
 
 @WebServlet("/match-score")
 public class MatchScoreServlet extends HttpServlet {
     private UUID uuid = null;
-    OngoingMatchesService ongoingMatchesService = new OngoingMatchesService();
-    MatchScoreCalculationService matchScoreCalculationService = new MatchScoreCalculationService();
-    FinishedMatchesPersistenceService finishedMatchesPersistenceService = new FinishedMatchesPersistenceService();
+    private  final  OngoingMatchesService ongoingMatchesService = new OngoingMatchesService();
+    private  final  MatchScoreCalculationService matchScoreCalculationService = new MatchScoreCalculationService();
+    private  final  FinishedMatchesPersistenceService finishedMatchesPersistenceService = new FinishedMatchesPersistenceService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        var uuid = req.getParameter("uuid");
-        if (uuid != null && ongoingMatchesService.containsMatch(UUID.fromString(uuid))) {
-            this.uuid = UUID.fromString(uuid);
-            var match = ongoingMatchesService.getMatch(this.uuid).get();
-            req.setAttribute("match", match);
-            req.getRequestDispatcher(JSPUtil.getPath("match-score")).forward(req, resp);
-        } else {
+        var uuidParametr = req.getParameter("uuid");
+        try {
+            uuid = UUID.fromString(uuidParametr);
+            var match = ongoingMatchesService.getMatch(uuid);
+            if (match.isPresent()){
+                req.setAttribute("match", match.get());
+                req.getRequestDispatcher(JSPUtil.getPath("match-score")).forward(req, resp);
+            } else {
+                resp.sendRedirect("/new-match");
+            }
+        } catch (Exception e){
             resp.sendRedirect("/new-match");
         }
     }
@@ -50,7 +56,5 @@ public class MatchScoreServlet extends HttpServlet {
             ongoingMatchesService.removeMatch(uuid);
             resp.sendRedirect("matchEnd");
         }
-
-
     }
 }
