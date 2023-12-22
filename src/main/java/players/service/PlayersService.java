@@ -9,10 +9,10 @@ import players.repository.PlayersRepository;
 import validator.players.CreatePlayerDtoValidator;
 
 public class PlayersService {
-    private final PlayersRepository playersRepository = new PlayersRepository();
-    private final ReadPlayersMapper readPlayersMapper = new ReadPlayersMapper();
-    private final CreatePlayersMapper createPlayersMapper = new CreatePlayersMapper();
-    private final CreatePlayerDtoValidator createPlayerDtoValidator = new CreatePlayerDtoValidator();
+    private static final PlayersRepository playersRepository = new PlayersRepository();
+    private static final ReadPlayersMapper readPlayersMapper = new ReadPlayersMapper();
+    private static final CreatePlayersMapper createPlayersMapper = new CreatePlayersMapper();
+    private static final CreatePlayerDtoValidator createPlayerDtoValidator = new CreatePlayerDtoValidator();
 
     public ReadPlayersDto createPlayer(CreatePlayersDto createPlayersDto) {
         var validationResult = createPlayerDtoValidator.isValid(createPlayersDto);

@@ -10,7 +10,6 @@ import service.FinishedMatchesPersistenceService;
 import service.MatchScoreCalculationService;
 import service.OngoingMatchesService;
 import util.JSPUtil;
-
 import java.io.IOException;
 import java.util.UUID;
 

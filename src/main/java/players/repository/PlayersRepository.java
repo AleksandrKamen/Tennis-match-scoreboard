@@ -1,9 +1,7 @@
 package players.repository;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import players.entity.PlayersEntity;
-import jakarta.persistence.EntityManager;
 import players.entity.PlayersEntity_;
 import util.HibernateUtil;
 import util.repository_util.BaseRepository;
@@ -24,7 +22,7 @@ public class PlayersRepository extends BaseRepository<Integer, PlayersEntity> {
             criteria.select(players)
                     .where(cb.equal(players
                             .get(PlayersEntity_.NAME),name));
-            Optional<PlayersEntity> playersEntity = session.createQuery(criteria).getResultStream().findFirst();
+            var playersEntity = session.createQuery(criteria).getResultStream().findFirst();
             session.getTransaction().commit();
             return playersEntity;
         }

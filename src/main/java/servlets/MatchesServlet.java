@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import matches.dto.ReadMatchesDto;
+import matches.service.MatchesService;
 import service.FinishedMatchesPersistenceService;
 import util.JSPUtil;
 import java.io.IOException;
@@ -13,7 +14,7 @@ import java.util.List;
 
 @WebServlet("/matches")
 public class MatchesServlet extends HttpServlet {
-    FinishedMatchesPersistenceService finishedMatchesPersistenceService = new FinishedMatchesPersistenceService();
+   private final FinishedMatchesPersistenceService finishedMatchesPersistenceService = new FinishedMatchesPersistenceService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -33,7 +34,7 @@ public class MatchesServlet extends HttpServlet {
         }
 
         req.setAttribute("matches", allMatches);
-        req.setAttribute("lastPage", (int) (Math.ceil(lastPage/7.0)));
+        req.setAttribute("lastPage", (int) (Math.ceil(lastPage/(MatchesService.getMATCH_LIMIT()*1.0))));
         req.setAttribute("page", page);
         req.getRequestDispatcher(JSPUtil.getPath("matches")).forward(req, resp);
 
