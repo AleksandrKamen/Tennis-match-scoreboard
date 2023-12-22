@@ -14,7 +14,7 @@ public class LocaleServlet extends HttpServlet {
         var lang = req.getParameter("lang");
         req.getSession().setAttribute("lang",lang);
         var prevPage = req.getHeader("referer");
-        var page = prevPage != null?prevPage:"Tennis-match-scoreboard";
+        var page = prevPage != null?prevPage:"menu";
         resp.sendRedirect(page);
     }
 }

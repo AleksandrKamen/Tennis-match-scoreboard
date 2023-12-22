@@ -19,25 +19,28 @@ public class MatchesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<ReadMatchesDto> allMatches;
-        Integer lastPage;
+        Integer matchesByCriterion;
         var parameter = req.getParameter("page");
         var page = parameter == null||Integer.parseInt(parameter)<1?1:Integer.parseInt(parameter);
         var filterByPlayerName = req.getParameter("filter_by_player_name");
 
         if (filterByPlayerName == null || filterByPlayerName.isEmpty()){
             allMatches = finishedMatchesPersistenceService.findAllMatchesWithPagination(page);
-            lastPage = finishedMatchesPersistenceService.findAllMatches().size();
+            matchesByCriterion = finishedMatchesPersistenceService.findAllMatches().size();
         } else {
             allMatches = finishedMatchesPersistenceService.findAllMatchesByPlayerNameWithPagination(filterByPlayerName, page);
             req.setAttribute("filter_by_player_name",filterByPlayerName);
-            lastPage = finishedMatchesPersistenceService.findAllMatchesByPlayerName(filterByPlayerName).size();
+            matchesByCriterion = finishedMatchesPersistenceService.findAllMatchesByPlayerName(filterByPlayerName).size();
         }
 
         req.setAttribute("matches", allMatches);
-        req.setAttribute("lastPage", (int) (Math.ceil(lastPage/(MatchesService.getMATCH_LIMIT()*1.0))));
+        req.setAttribute("lastPage", getLastPage(matchesByCriterion));
         req.setAttribute("page", page);
         req.getRequestDispatcher(JSPUtil.getPath("matches")).forward(req, resp);
-
-
+        
     }
+    private Integer getLastPage(int matchesByCriterion){
+        return (int) (Math.ceil(matchesByCriterion/(MatchesService.getMATCH_LIMIT()*1.0)));
+    }
+    
 }

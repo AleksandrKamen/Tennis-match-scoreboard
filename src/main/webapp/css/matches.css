@@ -19,10 +19,6 @@ th, td {
 .page{
     text-align: center;
 }
-#left, #left2,#right,#right2{
-    width: auto;
-    height: auto;
-}
 #txt{
     width: 5%;
     height: auto;
