@@ -3,11 +3,9 @@ package matches.service;
 import lombok.Getter;
 import matches.dto.CreateMathesDto;
 import matches.dto.ReadMatchesDto;
-import matches.entity.MatchesEntity;
 import matches.mapper.CreateMathesMapper;
 import matches.mapper.ReadMatchesMapper;
 import matches.repository.MathesRepository;
-import players.repository.PlayersRepository;
 import java.util.Collections;
 import java.util.List;
 
@@ -17,7 +15,6 @@ public class MatchesService {
     private static final MathesRepository mathesRepository = new MathesRepository();
     private static final CreateMathesMapper createMathesMapper = new CreateMathesMapper();
     private static final ReadMatchesMapper readMatchesMapper = new ReadMatchesMapper();
-
      public CreateMathesDto createMatch(CreateMathesDto createMathesDto) {
         var matchesEntity = createMathesMapper.mapFrom(createMathesDto);
         mathesRepository.save(matchesEntity);

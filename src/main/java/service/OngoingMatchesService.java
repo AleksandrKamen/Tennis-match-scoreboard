@@ -3,7 +3,7 @@ package service;
 import current_matches.CurrentMatches;
 import exception.ValidationException;
 import players.dto.CreatePlayersDto;
-import util.StandartNameUtil;
+import util.ChangePlayerNameUtil;
 import validator.players.PlayersNamesValidator;
 import java.util.List;
 import java.util.Optional;
@@ -21,8 +21,8 @@ public class OngoingMatchesService {
             throw new ValidationException(validationResult.getErrors());
         }
         var uuid = UUID.randomUUID();
-        var player1 = CreatePlayersDto.builder().name(StandartNameUtil.changeNameForWrite(player1Name)).build();
-        var player2 = CreatePlayersDto.builder().name(StandartNameUtil.changeNameForWrite(player2Name)).build();
+        var player1 = CreatePlayersDto.builder().name(ChangePlayerNameUtil.changeNameForWrite(player1Name)).build();
+        var player2 = CreatePlayersDto.builder().name(ChangePlayerNameUtil.changeNameForWrite(player2Name)).build();
         var newMatch = new CurrentMatches(uuid, player1,player2);
         ongoingMatches.put(uuid, newMatch);
         return newMatch;

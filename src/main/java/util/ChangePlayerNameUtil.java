@@ -4,7 +4,7 @@ import lombok.experimental.UtilityClass;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 @UtilityClass
-public class StandartNameUtil {
+public class ChangePlayerNameUtil {
 
     public String changeNameForSearch(String name){
         return Character.toUpperCase(name.charAt(0))+name.substring(1);
