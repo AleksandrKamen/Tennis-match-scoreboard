@@ -16,4 +16,10 @@ body{
     border-radius: 2%;
     cursor: pointer;
 }
+a:visited{
+    color: black;
+}
+a:hover{
+    color: white;
+}
 

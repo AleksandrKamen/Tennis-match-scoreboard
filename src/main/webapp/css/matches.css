@@ -20,7 +20,7 @@ th, td {
     text-align: center;
 }
 #left, #left2,#right,#right2{
-    width: 2%;
+    width: auto;
     height: auto;
 }
 #txt{

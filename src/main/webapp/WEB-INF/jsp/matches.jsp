@@ -16,12 +16,12 @@
 </div>
 
 <div class="search">
-<form action="/matches" method="get" enctype="text/plain">
+<form action="matches" method="get" enctype="text/plain">
     <label for="search"> <fmt:message key="matches.search"></fmt:message>
         <input type="text" name="filter_by_player_name" id="search" maxlength="30" required placeholder="<fmt:message key="matches.example"></fmt:message>Novak Djokovic">
     </label>
     <button type="submit" style="cursor: pointer"><fmt:message key="matches.searchButton"></fmt:message></button>
-   <a href="/matches"><button type="button" style="cursor: pointer"><fmt:message key="matches.clear"></fmt:message></button></a>
+   <a href="matches"><button type="button" style="cursor: pointer"><fmt:message key="matches.clear"></fmt:message></button></a>
 </form>
 </div>
 
@@ -44,11 +44,11 @@
 
     <c:choose>
      <c:when test="${not empty requestScope.filter_by_player_name}">
-         <a href="/matches?filter_by_player_name=${requestScope.filter_by_player_name}&page=${requestScope.page==1?1:requestScope.page-1}">
+         <a href="matches?filter_by_player_name=${requestScope.filter_by_player_name}&page=${requestScope.page==1?1:requestScope.page-1}">
              <img src="/css/picture/left.png" id="left"></a>
      </c:when>
         <c:otherwise>
-            <a href="/matches?page=${requestScope.page==1?1:requestScope.page-1}"><img src="/css/picture/left.png" id="left2"></a>
+            <a href="matches?page=${requestScope.page==1?1:requestScope.page-1}"><img src="/css/picture/left.png" id="left2"></a>
         </c:otherwise>
     </c:choose>
 
@@ -56,12 +56,12 @@
 
   <c:choose>
       <c:when test="${not empty requestScope.filter_by_player_name}">
-          <a href="/matches?filter_by_player_name=${requestScope.filter_by_player_name}&page=${requestScope.page < requestScope.lastPage?requestScope.page+1:requestScope.lastPage}">
+          <a href="matches?filter_by_player_name=${requestScope.filter_by_player_name}&page=${requestScope.page < requestScope.lastPage?requestScope.page+1:requestScope.lastPage}">
               <img src="/css/picture/right.png" id="right"></a>
       </c:when>
 
       <c:otherwise>
-        <a href="/matches?page=${requestScope.page < requestScope.lastPage?requestScope.page+1:requestScope.lastPage}"><img src="/css/picture/right.png" id="right2"> </a>
+        <a href="matches?page=${requestScope.page < requestScope.lastPage?requestScope.page+1:requestScope.lastPage}"><img src="/css/picture/right.png" id="right2"> </a>
       </c:otherwise>
   </c:choose>
 </div>

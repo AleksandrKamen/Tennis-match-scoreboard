@@ -29,10 +29,10 @@ public class MatchScoreServlet extends HttpServlet {
                 req.setAttribute("match", match.get());
                 req.getRequestDispatcher(JSPUtil.getPath("match-score")).forward(req, resp);
             } else {
-                resp.sendRedirect("/new-match");
+                resp.sendRedirect("new-match");
             }
         } catch (Exception e){
-            resp.sendRedirect("/new-match");
+            resp.sendRedirect("new-match");
         }
     }
     @Override
@@ -42,7 +42,7 @@ public class MatchScoreServlet extends HttpServlet {
         int plyerNumber = Integer.parseInt(parameter);
         var matchState = matchScoreCalculationService.updateScore(UUID.fromString(uuid), plyerNumber);
         if (matchState == MatchState.NOT_OVER){
-            resp.sendRedirect("/match-score?uuid=" + uuid);
+            resp.sendRedirect("match-score?uuid=" + uuid);
         } else {
             var currentMatches = ongoingMatchesService.getMatch(UUID.fromString(uuid)).get();
             req.getSession().setAttribute("winner",currentMatches.getWinner().getName());

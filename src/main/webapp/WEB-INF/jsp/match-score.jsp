@@ -34,11 +34,13 @@
         <td class="player">${match.getPlayer1().getName()}</td>
         <td>
             <div class="buttons">
-                <form action="/match-score?uuid=${match.getUuid()}" method="post">
-                    <button type="submit" name="player" value="0"><fmt:message key="match-score.player1"></fmt:message></button>
+                <form action="match-score?uuid=${match.getUuid()}" method="post">
+                    <button type="submit" id="b1" onclick="disableButton(this, b2)" ><fmt:message key="match-score.player1"></fmt:message></button>
+                    <input type="hidden" name="player" value="0">
                 </form>
         </div></td>
     </tr>
+
     <tr>
         <td class="score">${match.getScore().getCurrentPlayerScore(1).get(0)}</td>
         <td class="score">${match.getScore().getCurrentPlayerScore(1).get(1)}</td>
@@ -49,13 +51,21 @@
         <td class="player">${match.getPlayer2().getName()}</td>
         <td>
             <div class="buttons">
-             <form action="/match-score?uuid=${match.getUuid()}" method="post">
-                 <button type="submit" name="player" value="1"><fmt:message key="match-score.player2"></fmt:message></button>
+             <form action="match-score?uuid=${match.getUuid()}" method="post">
+                 <button type="submit" id="b2" onclick="disableButton(this, b1)"><fmt:message key="match-score.player2"></fmt:message></button>
+                 <input type="hidden" name="player" value="1">
              </form>
             </div>
         </td>
     </tr>
 </table>
-
 </body>
 </html>
+<script>
+    function disableButton(button, button2) {
+        button.innerHTML = 'Sending...';
+        button.form.submit();
+        button.disabled = true;
+        button2.disabled = true;
+    }
+</script>

@@ -28,7 +28,7 @@ public class NewMatchServlet extends HttpServlet {
 
         try {
             var currentMatches = ongoingMatchesService.creatNewMatch(playerName1, playerName2);
-            resp.sendRedirect("/match-score?uuid="+currentMatches.getUuid());
+            resp.sendRedirect("match-score?uuid="+currentMatches.getUuid());
 
         } catch (ValidationException validationException){
             req.setAttribute("errors",validationException.getErrors());

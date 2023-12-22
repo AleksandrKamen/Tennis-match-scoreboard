@@ -5,10 +5,10 @@
     <link rel="stylesheet" href="css/footer.css">
 </head>
 <div id="locale">
-<form action="/locale" method="post">
+<form action="locale" method="post">
     <div class="buttonsFooter">
-    <button type="submit"  name="lang" value="en_US">EN</button>
-    <button type="submit"  name="lang" value="ru_RU">RU</button>
+    <button type="submit"  name="lang" value="en_US" style="cursor: pointer">EN</button>
+    <button type="submit"  name="lang" value="ru_RU" style="cursor: pointer">RU</button>
     </div>
 </form>
     <fmt:setLocale value="${sessionScope.lang!=null?sessionScope.lang:'en_US'}"/>
