@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MatchesService {
     @Getter
-    private static final Integer MATCH_LIMIT = 7;
+    private static final Integer MATCHES_LIMIT_PER_PAGE = 7;
     private static final MathesRepository mathesRepository = new MathesRepository();
     private static final CreateMathesMapper createMathesMapper = new CreateMathesMapper();
     private static final ReadMatchesMapper readMatchesMapper = new ReadMatchesMapper();
@@ -29,8 +29,8 @@ public class MatchesService {
     }
 
     public List<ReadMatchesDto> findMatchesWithPagination(int page) {
-        int offset = page * MATCH_LIMIT - MATCH_LIMIT;
-        int limit = MATCH_LIMIT;
+        int offset = page * MATCHES_LIMIT_PER_PAGE - MATCHES_LIMIT_PER_PAGE;
+        int limit = MATCHES_LIMIT_PER_PAGE;
         return mathesRepository.findMatchesWithPagination(offset, limit).stream()
                 .map(readMatchesMapper::mapFrom)
                 .toList();
@@ -47,8 +47,8 @@ public class MatchesService {
     }
 
     public List<ReadMatchesDto> findMatchesByPlayerName(String playerName, int page) {
-        int offset = page * MATCH_LIMIT - MATCH_LIMIT;
-        int limit = MATCH_LIMIT;
+        int offset = page * MATCHES_LIMIT_PER_PAGE - MATCHES_LIMIT_PER_PAGE;
+        int limit = MATCHES_LIMIT_PER_PAGE;
         var matchesByPlayerNameWithPagination = mathesRepository.findMatchesByPlayerNameWithPagination(playerName, offset, limit);
         if (!matchesByPlayerNameWithPagination.isEmpty()) {
             return mathesRepository.findMatchesByPlayerNameWithPagination(playerName, offset, limit).stream()

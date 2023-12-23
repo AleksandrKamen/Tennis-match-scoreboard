@@ -1,6 +1,6 @@
 package players.service;
 
-import exception.ValidationException;
+import validator.exception.ValidationException;
 import players.dto.CreatePlayersDto;
 import players.dto.ReadPlayersDto;
 import players.mapper.CreatePlayersMapper;

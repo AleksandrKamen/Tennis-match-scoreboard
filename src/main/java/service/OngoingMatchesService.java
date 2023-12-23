@@ -1,7 +1,7 @@
 package service;
 
 import current_matches.CurrentMatches;
-import exception.ValidationException;
+import validator.exception.ValidationException;
 import players.dto.CreatePlayersDto;
 import util.ChangePlayerNameUtil;
 import validator.players.PlayersNamesValidator;
@@ -21,8 +21,8 @@ public class OngoingMatchesService {
             throw new ValidationException(validationResult.getErrors());
         }
         var uuid = UUID.randomUUID();
-        var player1 = CreatePlayersDto.builder().name(ChangePlayerNameUtil.changeNameForWrite(player1Name)).build();
-        var player2 = CreatePlayersDto.builder().name(ChangePlayerNameUtil.changeNameForWrite(player2Name)).build();
+        var player1 = CreatePlayersDto.builder().name(ChangePlayerNameUtil.changePlayerNameForWrite(player1Name)).build();
+        var player2 = CreatePlayersDto.builder().name(ChangePlayerNameUtil.changePlayerNameForWrite(player2Name)).build();
         var newMatch = new CurrentMatches(uuid, player1,player2);
         ongoingMatches.put(uuid, newMatch);
         return newMatch;
@@ -32,8 +32,5 @@ public class OngoingMatchesService {
     }
     public Optional<CurrentMatches> getMatch(UUID uuid) {
         return Optional.ofNullable(ongoingMatches.get(uuid));
-    }
-    public boolean containsMatch(UUID uuid) {
-        return ongoingMatches.containsKey(uuid);
     }
 }

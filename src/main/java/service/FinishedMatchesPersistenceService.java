@@ -1,14 +1,13 @@
 package service;
 
 import current_matches.CurrentMatches;
-import exception.ValidationException;
+import validator.exception.ValidationException;
 import matches.dto.CreateMathesDto;
 import matches.dto.ReadMatchesDto;
 import matches.service.MatchesService;
 import players.dto.CreatePlayersDto;
 import players.service.PlayersService;
 import java.util.List;
-
 
 public class FinishedMatchesPersistenceService {
     private static final MatchesService matchService = new MatchesService();
@@ -43,16 +42,14 @@ public class FinishedMatchesPersistenceService {
                     .builder()
                     .name(createMathesDto.getPlayer1())
                     .build());
-        } catch (ValidationException e) {
-        }
+        } catch (ValidationException e) {}
         try {
             playersService.createPlayer(
                     CreatePlayersDto
                             .builder()
                             .name(createMathesDto.getPlayer2())
                             .build());
-        } catch (ValidationException e) {
-        }
+        } catch (ValidationException e) {}
 
     }
 

@@ -32,7 +32,7 @@ public class MathesRepository extends BaseRepository<Integer, MatchesEntity> {
         try (Session session = HibernateUtil.getSession()) {
             session.beginTransaction();
             var query = session.createQuery("select m from MatchesEntity m where player1.name like :playerName or player2.name like :playerName", MatchesEntity.class);
-            query.setParameter("playerName", ChangePlayerNameUtil.changeNameForSearch(playerName) + "%");
+            query.setParameter("playerName", ChangePlayerNameUtil.changePlayerNameForSearch(playerName) + "%");
             var resultList = query.getResultList();
             session.getTransaction().commit();
             return resultList;
@@ -43,7 +43,7 @@ public class MathesRepository extends BaseRepository<Integer, MatchesEntity> {
         try (Session session = HibernateUtil.getSession()) {
             session.beginTransaction();
             var query = session.createQuery("select m from MatchesEntity m where player1.name like :playerName or player2.name like :playerName", MatchesEntity.class);
-            query.setParameter("playerName", ChangePlayerNameUtil.changeNameForSearch(playerName) + "%");
+            query.setParameter("playerName", ChangePlayerNameUtil.changePlayerNameForSearch(playerName) + "%");
             query.setFirstResult(page);
             query.setMaxResults(limit);
             var resultList = query.getResultList();

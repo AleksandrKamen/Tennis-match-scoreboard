@@ -1,4 +1,4 @@
-package exception;
+package validator.exception;
 
 import lombok.Getter;
 import validator.Error;

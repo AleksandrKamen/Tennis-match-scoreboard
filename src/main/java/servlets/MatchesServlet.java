@@ -40,7 +40,7 @@ public class MatchesServlet extends HttpServlet {
         
     }
     private Integer getLastPage(int matchesByCriterion){
-        return (int) (Math.ceil(matchesByCriterion/(MatchesService.getMATCH_LIMIT()*1.0)));
+        return (int) (Math.ceil(matchesByCriterion/(MatchesService.getMATCHES_LIMIT_PER_PAGE()*1.0)));
     }
     
 }

@@ -38,7 +38,7 @@ public class MatchScoreServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         var parameter = req.getParameter("player");
         var uuid = req.getParameter("uuid");
-        int plyerNumber = Integer.parseInt(parameter);
+        var plyerNumber = Integer.parseInt(parameter);
         var matchState = matchScoreCalculationService.updateScore(UUID.fromString(uuid), plyerNumber);
         if (matchState == MatchState.NOT_OVER){
             resp.sendRedirect("match-score?uuid=" + uuid);
