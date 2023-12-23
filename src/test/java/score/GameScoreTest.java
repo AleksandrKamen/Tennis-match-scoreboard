@@ -8,20 +8,23 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class GameScoreTest {
     GameScore gameScore;
+
     @BeforeEach
     void init() {
         gameScore = new GameScore();
     }
+
     @AfterEach
     void drop() {
         gameScore = null;
     }
+
     @Nested
-    class isGameNotOverTest{
+    class isGameNotOverTest {
         @ParameterizedTest
         @MethodSource("score.GameScoreTest#getSetPoint")
         @DisplayName("return state - game is not over, if score first player < 5 and score second player < 5")
@@ -31,6 +34,7 @@ class GameScoreTest {
             gameScore.setPlayerScore(1, GameValues.valueOf(setPoint));
             assertEquals(gameScore.pointWon(1), MatchState.NOT_OVER);
         }
+
         @Test
         @DisplayName("return state - game is not over, if score first player = 6 and score second player = 5")
         void gameIsNotOverIfScoreSixFive() {
@@ -39,8 +43,9 @@ class GameScoreTest {
             assertEquals(gameScore.pointWon(0), MatchState.NOT_OVER);
         }
     }
+
     @Nested
-    class FirstOrSecondPlayerWinsTest{
+    class FirstOrSecondPlayerWinsTest {
         @ParameterizedTest
         @MethodSource("score.GameScoreTest#getSetPoint")
         @DisplayName("return state: FIRST_PLAYER_WON, if score first player = 5 and score second player < 5")
@@ -59,16 +64,17 @@ class GameScoreTest {
             assertEquals(gameScore.gameWon(1), MatchState.SECOND_PLAYER_WON);
         }
     }
-        @Test
-        void startTieBreak(){
-            gameScore.setPlayerScore(0, GameValues.FIVE);
-            gameScore.setPlayerScore(1, GameValues.SIX);
-            assertEquals(gameScore.gameWon(0), MatchState.NOT_OVER);
-            for (int i = 0; i <6; i++) {
-                assertEquals(gameScore.pointWon(0), MatchState.NOT_OVER);
-            }
-            assertEquals(gameScore.pointWon(0), MatchState.FIRST_PLAYER_WON);
+
+    @Test
+    void startTieBreak() {
+        gameScore.setPlayerScore(0, GameValues.FIVE);
+        gameScore.setPlayerScore(1, GameValues.SIX);
+        assertEquals(gameScore.gameWon(0), MatchState.NOT_OVER);
+        for (int i = 0; i < 6; i++) {
+            assertEquals(gameScore.pointWon(0), MatchState.NOT_OVER);
         }
+        assertEquals(gameScore.pointWon(0), MatchState.FIRST_PLAYER_WON);
+    }
 
     static Stream<Arguments> getSetPoint() {
         return Stream.of(

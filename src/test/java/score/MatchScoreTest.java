@@ -3,9 +3,7 @@ package score;
 import current_matches.score.MatchScore;
 import current_matches.score.MatchState;
 import org.junit.jupiter.api.*;
-
 import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 

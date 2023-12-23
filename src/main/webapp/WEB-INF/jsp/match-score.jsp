@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@include file="headers/menu_header.jsp"%>
-<%@include file="footer/locale_footer.jsp"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@include file="headers/menu_header.jsp" %>
+<%@include file="footer/locale_footer.jsp" %>
 <html>
 <head>
     <title>Match-Score</title>
@@ -35,10 +35,12 @@
         <td>
             <div class="buttons">
                 <form action="match-score?uuid=${match.getUuid()}" method="post">
-                    <button type="submit" id="b1" onclick="disableButton(this, b2)" ><fmt:message key="match-score.player1"></fmt:message></button>
+                    <button type="submit" id="b1" onclick="disableButton(this, b2)"><fmt:message
+                            key="match-score.player1"></fmt:message></button>
                     <input type="hidden" name="player" value="0">
                 </form>
-        </div></td>
+            </div>
+        </td>
     </tr>
 
     <tr>
@@ -51,10 +53,11 @@
         <td class="player">${match.getPlayer2().getName()}</td>
         <td>
             <div class="buttons">
-             <form action="match-score?uuid=${match.getUuid()}" method="post">
-                 <button type="submit" id="b2" onclick="disableButton(this, b1)"><fmt:message key="match-score.player2"></fmt:message></button>
-                 <input type="hidden" name="player" value="1">
-             </form>
+                <form action="match-score?uuid=${match.getUuid()}" method="post">
+                    <button type="submit" id="b2" onclick="disableButton(this, b1)"><fmt:message
+                            key="match-score.player2"></fmt:message></button>
+                    <input type="hidden" name="player" value="1">
+                </form>
             </div>
         </td>
     </tr>

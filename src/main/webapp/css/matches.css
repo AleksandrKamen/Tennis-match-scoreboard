@@ -1,10 +1,10 @@
-body{
+body {
     background-image: url("picture/background_matches.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-table,.search {
+table, .search {
     width: 80%;
     border-collapse: collapse;
     margin: auto;
@@ -16,10 +16,12 @@ th, td {
     padding: 8px;
     text-align: center;
 }
-.page{
+
+.page {
     text-align: center;
 }
-#txt{
+
+#txt {
     width: 5%;
     height: auto;
 }

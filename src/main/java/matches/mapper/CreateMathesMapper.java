@@ -6,7 +6,8 @@ import players.repository.PlayersRepository;
 import util.mapper_util.Mapper;
 
 public class CreateMathesMapper implements Mapper<CreateMathesDto, MatchesEntity> {
-   private final PlayersRepository playersRepository = new PlayersRepository();
+    private final PlayersRepository playersRepository = new PlayersRepository();
+
     @Override
     public MatchesEntity mapFrom(CreateMathesDto object) {
 

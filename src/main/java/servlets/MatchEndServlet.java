@@ -18,7 +18,7 @@ public class MatchEndServlet extends HttpServlet {
         var player2 = req.getSession().getAttribute("player2");
         var playerScore1 = req.getSession().getAttribute("playerScore1");
         var playerScore2 = req.getSession().getAttribute("playerScore2");
-        if (winner == null || player1 == null || player2 == null || playerScore1 == null || playerScore2 == null){
+        if (winner == null || player1 == null || player2 == null || playerScore1 == null || playerScore2 == null) {
             resp.sendRedirect("/new-match");
         } else {
             req.setAttribute("winner", winner);

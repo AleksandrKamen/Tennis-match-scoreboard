@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import util.HibernateUtil;
 import util.ChangePlayerNameUtil;
 import util.repository_util.BaseRepository;
+
 import java.util.List;
 
 public class MathesRepository extends BaseRepository<Integer, MatchesEntity> {
@@ -13,13 +14,13 @@ public class MathesRepository extends BaseRepository<Integer, MatchesEntity> {
     }
 
     public List<MatchesEntity> findMatchesWithPagination(Integer page, Integer limit) {
-        try (Session session = HibernateUtil.getSession()) {
+        try (var session = HibernateUtil.getSession()) {
             session.beginTransaction();
             var cb = session.getCriteriaBuilder();
             var criteria = cb.createQuery(MatchesEntity.class);
             var matches = criteria.from(MatchesEntity.class);
             criteria.select(matches);
-            List<MatchesEntity> resultList = session.createQuery(criteria)
+            var resultList = session.createQuery(criteria)
                     .setFirstResult(page)
                     .setMaxResults(limit)
                     .getResultList();
@@ -29,7 +30,7 @@ public class MathesRepository extends BaseRepository<Integer, MatchesEntity> {
     }
 
     public List<MatchesEntity> findMatchesByPlayerName(String playerName) {
-        try (Session session = HibernateUtil.getSession()) {
+        try (var session = HibernateUtil.getSession()) {
             session.beginTransaction();
             var query = session.createQuery("select m from MatchesEntity m where player1.name like :playerName or player2.name like :playerName", MatchesEntity.class);
             query.setParameter("playerName", ChangePlayerNameUtil.changePlayerNameForSearch(playerName) + "%");
@@ -40,7 +41,7 @@ public class MathesRepository extends BaseRepository<Integer, MatchesEntity> {
     }
 
     public List<MatchesEntity> findMatchesByPlayerNameWithPagination(String playerName, Integer page, Integer limit) {
-        try (Session session = HibernateUtil.getSession()) {
+        try (var session = HibernateUtil.getSession()) {
             session.beginTransaction();
             var query = session.createQuery("select m from MatchesEntity m where player1.name like :playerName or player2.name like :playerName", MatchesEntity.class);
             query.setParameter("playerName", ChangePlayerNameUtil.changePlayerNameForSearch(playerName) + "%");

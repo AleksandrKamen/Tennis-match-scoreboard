@@ -1,8 +1,9 @@
-body{
+body {
     background-image: url("picture/background_newMatch.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 #menu {
     text-align: center;
     margin-top: 5vw;

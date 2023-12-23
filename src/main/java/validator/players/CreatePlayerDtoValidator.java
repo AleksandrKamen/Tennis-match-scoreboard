@@ -5,7 +5,6 @@ import players.repository.PlayersRepository;
 import validator.Error;
 import validator.ValidationResult;
 import validator.Validator;
-
 import java.util.ResourceBundle;
 
 public class CreatePlayerDtoValidator implements Validator<CreatePlayersDto> {
@@ -14,8 +13,8 @@ public class CreatePlayerDtoValidator implements Validator<CreatePlayersDto> {
     public ValidationResult isValid(CreatePlayersDto object) {
         var bundle = ResourceBundle.getBundle("translations");
         var validationResult = new ValidationResult();
-        if (new PlayersRepository().findByName(object.getName()).isPresent()){
-            validationResult.add(Error.of(400,bundle.getString("error.playerDto")));
+        if (new PlayersRepository().findByName(object.getName()).isPresent()) {
+            validationResult.add(Error.of(400, bundle.getString("error.playerDto")));
         }
         return validationResult;
     }

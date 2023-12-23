@@ -13,13 +13,13 @@ public class PlayersNamesValidator implements Validator<List<String>> {
         var bundle = ResourceBundle.getBundle("translations", Locale.US);
         var validationResult = new ValidationResult();
         var pattern = "^[a-zA-Z][a-zA-Z ]*$";
-        if (!names.get(0).matches(pattern) || !names.get(1).matches(pattern)){
+        if (!names.get(0).matches(pattern) || !names.get(1).matches(pattern)) {
             validationResult.add(Error.of(400, bundle.getString("error.names")));
         }
-        if (names.get(0).contains("  ") || names.get(1).contains("  ") ){
+        if (names.get(0).contains("  ") || names.get(1).contains("  ")) {
             validationResult.add(Error.of(400, bundle.getString("error.names.double-spase")));
         }
-        if (names.get(0).equals(names.get(1))){
+        if (names.get(0).equals(names.get(1))) {
             validationResult.add(Error.of(400, bundle.getString("error.names.duplicate")));
         }
         return validationResult;

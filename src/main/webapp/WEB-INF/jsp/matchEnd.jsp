@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@include file="headers/menu_header.jsp"%>
-<%@include file="footer/locale_footer.jsp"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@include file="headers/menu_header.jsp" %>
+<%@include file="footer/locale_footer.jsp" %>
 <html>
 <head>
     <title>MatchEnd</title>
@@ -28,9 +28,13 @@
 </table>
 
 <div class="endButton">
-    <a href="new-match"> <button type="button"><fmt:message key="match-score.newMatchButton"></fmt:message></button></a>
+    <a href="new-match">
+        <button type="button"><fmt:message key="match-score.newMatchButton"></fmt:message></button>
+    </a>
     <span style="margin: 0 30px;"></span>
-    <a href="matches"> <button type="button"><fmt:message key="home.matches"></fmt:message></button></a>
+    <a href="matches">
+        <button type="button"><fmt:message key="home.matches"></fmt:message></button>
+    </a>
 </div>
 </body>
 </html>

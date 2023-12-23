@@ -42,14 +42,17 @@ public class FinishedMatchesPersistenceService {
                     .builder()
                     .name(createMathesDto.getPlayer1())
                     .build());
-        } catch (ValidationException e) {}
+        } catch (ValidationException e) {
+        }
+
         try {
             playersService.createPlayer(
                     CreatePlayersDto
                             .builder()
                             .name(createMathesDto.getPlayer2())
                             .build());
-        } catch (ValidationException e) {}
+        } catch (ValidationException e) {
+        }
 
     }
 

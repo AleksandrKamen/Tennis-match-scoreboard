@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "players", indexes = {@Index(name = "name_idx", columnList = "name")})
-public class PlayersEntity  {
+public class PlayersEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

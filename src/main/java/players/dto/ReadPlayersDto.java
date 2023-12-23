@@ -6,6 +6,6 @@ import lombok.Value;
 @Value
 @Builder
 public class ReadPlayersDto {
-   private Integer id;
-   private  String name;
+    private Integer id;
+    private String name;
 }

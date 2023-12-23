@@ -3,12 +3,13 @@ package util;
 import lombok.experimental.UtilityClass;
 import matches.dto.CreateMathesDto;
 import service.FinishedMatchesPersistenceService;
+
 import java.util.List;
 import java.util.Random;
 
 @UtilityClass
 public class DataImporterUtil {
-    private FinishedMatchesPersistenceService finishedMatchesPersistenceService = new FinishedMatchesPersistenceService();
+    private final FinishedMatchesPersistenceService finishedMatchesPersistenceService = new FinishedMatchesPersistenceService();
 
     public void importData() {
         for (int i = 0; i < 50; i++) {

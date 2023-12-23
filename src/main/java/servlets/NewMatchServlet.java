@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import service.OngoingMatchesService;
 import util.JSPUtil;
-
 import java.io.IOException;
 
 import static jakarta.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
@@ -16,6 +15,7 @@ import static jakarta.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 @WebServlet("/new-match")
 public class NewMatchServlet extends HttpServlet {
     private static final OngoingMatchesService ongoingMatchesService = new OngoingMatchesService();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher(JSPUtil.getPath("newMatch")).forward(req, resp);
@@ -28,12 +28,12 @@ public class NewMatchServlet extends HttpServlet {
 
         try {
             var currentMatches = ongoingMatchesService.creatNewMatch(playerName1, playerName2);
-            resp.sendRedirect("match-score?uuid="+currentMatches.getUuid());
+            resp.sendRedirect("match-score?uuid=" + currentMatches.getUuid());
 
-        } catch (ValidationException validationException){
-            req.setAttribute("errors",validationException.getErrors());
-            doGet(req,resp);
-        } catch (Exception e){
+        } catch (ValidationException validationException) {
+            req.setAttribute("errors", validationException.getErrors());
+            doGet(req, resp);
+        } catch (Exception e) {
             resp.setStatus(SC_INTERNAL_SERVER_ERROR);
         }
 

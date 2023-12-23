@@ -11,27 +11,27 @@ public abstract class Score<T> {
 
     protected abstract T getZeroScore();
 
-    public Score(){
+    public Score() {
         playerScore.add(getZeroScore());
         playerScore.add(getZeroScore());
     }
 
-    public T getPlayerScore(int playerNumber){
+    public T getPlayerScore(int playerNumber) {
         return playerScore.get(playerNumber);
     }
 
-    public T getOppositeScore(int playerNumber){
-        return playerScore.get((playerNumber == 0?1:0));
+    public T getOppositeScore(int playerNumber) {
+        return playerScore.get((playerNumber == 0 ? 1 : 0));
     }
 
-    public void setPlayerScore(int playerNumber, T score){
-        playerScore.set(playerNumber,score);
+    public void setPlayerScore(int playerNumber, T score) {
+        playerScore.set(playerNumber, score);
     }
-    public void setOppositeScore(int playerNumber, T score){
-        playerScore.set(playerNumber == 0?1:0,score);
+
+    public void setOppositeScore(int playerNumber, T score) {
+        playerScore.set(playerNumber == 0 ? 1 : 0, score);
     }
 
     public abstract MatchState pointWon(int playerNumber);
-
 
 }

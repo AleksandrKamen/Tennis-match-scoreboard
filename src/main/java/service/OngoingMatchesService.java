@@ -16,20 +16,22 @@ public class OngoingMatchesService {
 
     public CurrentMatches creatNewMatch(String player1Name, String player2Name) {
 
-        var validationResult = playerNameValidator.isValid(List.of(player1Name,player2Name));
-        if (!validationResult.isValid()){
+        var validationResult = playerNameValidator.isValid(List.of(player1Name, player2Name));
+        if (!validationResult.isValid()) {
             throw new ValidationException(validationResult.getErrors());
         }
         var uuid = UUID.randomUUID();
         var player1 = CreatePlayersDto.builder().name(ChangePlayerNameUtil.changePlayerNameForWrite(player1Name)).build();
         var player2 = CreatePlayersDto.builder().name(ChangePlayerNameUtil.changePlayerNameForWrite(player2Name)).build();
-        var newMatch = new CurrentMatches(uuid, player1,player2);
+        var newMatch = new CurrentMatches(uuid, player1, player2);
         ongoingMatches.put(uuid, newMatch);
         return newMatch;
     }
+
     public void removeMatch(UUID uuid) {
         ongoingMatches.remove(uuid);
     }
+
     public Optional<CurrentMatches> getMatch(UUID uuid) {
         return Optional.ofNullable(ongoingMatches.get(uuid));
     }

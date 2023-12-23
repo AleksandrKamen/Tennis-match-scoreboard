@@ -12,29 +12,33 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RegularGameScoreTest {
-     PointScore pointScore;
+    PointScore pointScore;
+
     @BeforeEach
-    void init(){
-         pointScore = new PointScore();
+    void init() {
+        pointScore = new PointScore();
     }
+
     @AfterEach
-    void drop(){
+    void drop() {
         pointScore = null;
     }
+
     @ParameterizedTest
-    @ValueSource(strings = {"ZERO","FIFTEEN","THIRTY","FORTY"})
+    @ValueSource(strings = {"ZERO", "FIFTEEN", "THIRTY", "FORTY"})
     @DisplayName("return state - game is not over")
-  void gameIsNotOver(String values){
-        pointScore.setPlayerScore(0,PointValues.valueOf(values));
-        pointScore.setPlayerScore(1,PointValues.valueOf(values));
+    void gameIsNotOver(String values) {
+        pointScore.setPlayerScore(0, PointValues.valueOf(values));
+        pointScore.setPlayerScore(1, PointValues.valueOf(values));
         assertEquals(pointScore.pointWon(0), MatchState.NOT_OVER);
 
-        pointScore.setPlayerScore(0,PointValues.FORTY);
-        pointScore.setPlayerScore(1,PointValues.ADVANTAGE);
+        pointScore.setPlayerScore(0, PointValues.FORTY);
+        pointScore.setPlayerScore(1, PointValues.ADVANTAGE);
         assertEquals(pointScore.pointWon(0), MatchState.NOT_OVER);
-  }
+    }
+
     @ParameterizedTest
-    @ValueSource(strings = {"ZERO","FIFTEEN","THIRTY"})
+    @ValueSource(strings = {"ZERO", "FIFTEEN", "THIRTY"})
     @DisplayName("return state - FIRST_PLAYER_WINS or SECOND_PLAYER_WINS")
     void firstPlayerWins(String values) {
         pointScore.setPlayerScore(0, PointValues.FORTY);
@@ -53,12 +57,12 @@ class RegularGameScoreTest {
         pointScore.setPlayerScore(1, PointValues.ADVANTAGE);
         assertEquals(pointScore.pointWon(1), MatchState.SECOND_PLAYER_WON);
     }
+
     @Test
     @DisplayName("throw exception if invalid point name")
     void inv() {
-      assertThrows(IllegalArgumentException.class,()-> pointScore.setOppositeScore(0, PointValues.valueOf("someName")));
+        assertThrows(IllegalArgumentException.class, () -> pointScore.setOppositeScore(0, PointValues.valueOf("someName")));
     }
-
 
 
 }
