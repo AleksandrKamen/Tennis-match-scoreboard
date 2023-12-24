@@ -19,7 +19,7 @@ public class PlayersNamesValidator implements Validator<List<String>> {
         if (names.get(0).contains("  ") || names.get(1).contains("  ")) {
             validationResult.add(Error.of(400, bundle.getString("error.names.double-spase")));
         }
-        if (names.get(0).equals(names.get(1))) {
+        if (names.get(0).trim().equals(names.get(1).trim())) {
             validationResult.add(Error.of(400, bundle.getString("error.names.duplicate")));
         }
         return validationResult;
